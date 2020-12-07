@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Hosting;
 using WebApplication26.Models;
 
 namespace WebApplication26.Controllers
@@ -13,23 +15,25 @@ namespace WebApplication26.Controllers
     public class StudentDetailsController : Controller
     {
         private readonly project1211Context _context;
-
-        public StudentDetailsController(project1211Context context)
+        private readonly IWebHostEnvironment hostEnvironment;
+        public StudentDetailsController(project1211Context context, IWebHostEnvironment hostEnvironment)
         {
             _context = context;
+            this.hostEnvironment = hostEnvironment;
+
         }
 
         // GET: StudentDetails
         public async Task<IActionResult> Index()
         {
-            var CurrentUserIDSession = HttpContext.Session.GetString("name");
-            if (string.IsNullOrEmpty(CurrentUserIDSession))
-            {
+            //var CurrentUserIDSession = HttpContext.Session.GetString("name");
+            //if (string.IsNullOrEmpty(CurrentUserIDSession))
+            //{
 
-                return RedirectToAction("Index", "Login");
+            //    return RedirectToAction("Index", "Login");
                 
-            }
-            else
+            //}
+            //else
             return View(await _context.StudentDetails.ToListAsync());
         }
 
@@ -50,7 +54,23 @@ namespace WebApplication26.Controllers
 
             return View(studentDetail);
         }
+      
+        public async Task<IActionResult> Myprofilee(int? id)
+        {var Email = HttpContext.Session.GetString("Email");
+            if (Email == null)
+            {
+                return NotFound();
+            }
 
+            var studentDetail = await _context.StudentDetails
+                .FirstOrDefaultAsync(m => m.Email==Email);
+            if (studentDetail == null)
+            {
+                return NotFound();
+            }
+
+            return View(studentDetail);
+        }
         // GET: StudentDetails/Create
         public IActionResult Create()
         {
@@ -62,8 +82,9 @@ namespace WebApplication26.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PkStudentId,EnrollId,Email,FirstName,LastName,DateOfBirth,Contact,Address,Pswd,Course,FatherName,CreatedDate,IsActive,IsDeleted")] StudentDetail studentDetail)
-        {
+        public async Task<IActionResult> Create([Bind("PkStudentId,EnrollId,Email,FirstName,LastName,DateOfBirth,Contact,Address,Pswd,Course,FatherName,CreatedDate,IsActive,IsDeleted,")] StudentDetail studentDetail)
+        { 
+          
             if (ModelState.IsValid)
             {
                 _context.Add(studentDetail);
@@ -72,6 +93,7 @@ namespace WebApplication26.Controllers
             }
             return View(studentDetail);
         }
+      
 
         // GET: StudentDetails/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -94,13 +116,24 @@ namespace WebApplication26.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PkStudentId,EnrollId,Email,FirstName,LastName,DateOfBirth,Contact,Address,Pswd,Course,FatherName,CreatedDate,IsActive,IsDeleted")] StudentDetail studentDetail)
+        public async Task<IActionResult> Edit(int id, [Bind("PkStudentId,EnrollId,Email,FirstName,LastName,DateOfBirth,Contact,Address,Pswd,Course,FatherName,CreatedDate,IsActive,IsDeleted,PProfilepic")] StudentDetail studentDetail)
         {
             if (id != studentDetail.PkStudentId)
             {
                 return NotFound();
             }
-
+          //  if (studentDetail.PProfilepic.ToString().DefaultIfEmpty()!="")
+            {
+                string wwwRootPath = hostEnvironment.WebRootPath;
+                string fileName = Path.GetFileNameWithoutExtension(studentDetail.PProfilepic.FileName);
+                string ext = Path.GetExtension(studentDetail.PProfilepic.FileName);
+                studentDetail.studentPic = fileName + DateTime.Now.ToString("yymmssff") + ext;
+                string path = Path.Combine(wwwRootPath + "/images/", studentDetail.studentPic);
+                using (var filestrem = new FileStream(path, FileMode.Create))
+                {
+                    await studentDetail.PProfilepic.CopyToAsync(filestrem);
+                }
+            }
             if (ModelState.IsValid)
             {
                 try

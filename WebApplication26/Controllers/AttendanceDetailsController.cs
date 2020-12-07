@@ -47,7 +47,7 @@ namespace WebApplication26.Controllers
         // GET: AttendanceDetails/Create
         public IActionResult Create()
         {
-            ViewData["FkStudId"] = new SelectList(_context.StudentDetails, "PkStudentId", "Contact");
+            ViewData["FkStudId"] = new SelectList(_context.StudentDetails, "PkStudentId", "PkStudentId");
             return View();
         }
 

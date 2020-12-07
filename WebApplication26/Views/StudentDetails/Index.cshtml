@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<WebApplication26.Models.StudentDetail>
+@using Microsoft.AspNetCore.Http;
 
 @{
     ViewData["Title"] = "Index";
@@ -45,17 +46,21 @@
             <th>
                 @Html.DisplayNameFor(model => model.CreatedDate)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsActive)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsDeleted)
-            </th>
+            @if (@Context.Session.GetString("Type") == "3")
+            {
+                <th>
+                    @Html.DisplayNameFor(model => model.IsActive)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IsDeleted)
+                </th>
+            }
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @foreach (var item in Model)
+        {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.EnrollId)
@@ -87,21 +92,31 @@
             <td>
                 @Html.DisplayFor(modelItem => item.FatherName)
             </td>
+
             <td>
                 @Html.DisplayFor(modelItem => item.CreatedDate)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsActive)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsDeleted)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.PkStudentId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.PkStudentId">Details</a> |
+            @if (@Context.Session.GetString("Type") == "3")
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsActive)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsDeleted)
+                </td>
+            }
+        <td>
+            @if ((@Context.Session.GetString("Type") == "3") || (@Context.Session.GetString("Email") == item.Email))
+            {
+                <a asp-action="Edit" asp-route-id="@item.PkStudentId">Edit</a>
+            }|
+            <a asp-action="Details" asp-route-id="@item.PkStudentId">Details</a> |
+            @if (@Context.Session.GetString("Type") == "3") 
+            {
                 <a asp-action="Delete" asp-route-id="@item.PkStudentId">Delete</a>
+            }
             </td>
         </tr>
-}
+        }
     </tbody>
 </table>

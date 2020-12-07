@@ -16,5 +16,6 @@ namespace WebApplication26.Models
         [Display(Name = "UserPwd")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
+        public int checktype { get; set; }
     }
 }

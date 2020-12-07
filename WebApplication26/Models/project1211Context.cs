@@ -28,7 +28,7 @@ namespace WebApplication26.Models
         public virtual DbSet<MstSubject> MstSubjects { get; set; }
         public virtual DbSet<MstUser> MstUsers { get; set; }
         public virtual DbSet<StudentDetail> StudentDetails { get; set; }
-
+        public virtual DbSet<Logincs> Login { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)

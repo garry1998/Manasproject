@@ -53,6 +53,17 @@
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="checktype" class="control-label">Login Type</label>
+               
+
+                <select  asp-for="checktype">
+                    <option asp-for="checktype" value="1">Student</option>
+                    <option asp-for="checktype" value="2">Faculty</option>
+                    <option asp-for="checktype" value="3">Admin</option>
+                </select>
+            </div>
+           
+            <div class="form-group">
                 <input type="submit" value="Sign-In" class="btn btn-primary" />
             </div>
 

@@ -9065,11 +9065,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\grvci\\source\\repos\\WebApplication26\\WebApplication26.csproj",
+      "projectUniqueName": "C:\\Git\\Manas Project\\WebApplication26\\WebApplication26.csproj",
       "projectName": "WebApplication26",
-      "projectPath": "C:\\Users\\grvci\\source\\repos\\WebApplication26\\WebApplication26.csproj",
+      "projectPath": "C:\\Git\\Manas Project\\WebApplication26\\WebApplication26.csproj",
       "packagesPath": "C:\\Users\\grvci\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\grvci\\source\\repos\\WebApplication26\\obj\\",
+      "outputPath": "C:\\Git\\Manas Project\\WebApplication26\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\grvci\\AppData\\Roaming\\NuGet\\NuGet.Config",
