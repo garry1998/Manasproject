@@ -6,10 +6,12 @@
 }
 
 <h1>Index</h1>
-
+@if (@Context.Session.GetString("Type") == "2")
+            {
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+}
 <table class="table">
     <thead>
         <tr>
@@ -34,9 +36,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Address)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Pswd)
-            </th>
+
             <th>
                 @Html.DisplayNameFor(model => model.Course)
             </th>
@@ -48,12 +48,12 @@
             </th>
             @if (@Context.Session.GetString("Type") == "3")
             {
-                <th>
-                    @Html.DisplayNameFor(model => model.IsActive)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.IsDeleted)
-                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsActive)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsDeleted)
+            </th>
             }
             <th></th>
         </tr>
@@ -83,9 +83,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Address)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Pswd)
-            </td>
+
             <td>
                 @Html.DisplayFor(modelItem => item.Course)
             </td>
@@ -98,20 +96,20 @@
             </td>
             @if (@Context.Session.GetString("Type") == "3")
             {
-                <td>
-                    @Html.DisplayFor(modelItem => item.IsActive)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IsDeleted)
-                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsDeleted)
+            </td>
             }
-        <td>
-            @if ((@Context.Session.GetString("Type") == "3") || (@Context.Session.GetString("Email") == item.Email))
+            <td>
+                @if ((@Context.Session.GetString("Type") == "3") || (@Context.Session.GetString("Email") == item.Email))
             {
                 <a asp-action="Edit" asp-route-id="@item.PkStudentId">Edit</a>
             }|
-            <a asp-action="Details" asp-route-id="@item.PkStudentId">Details</a> |
-            @if (@Context.Session.GetString("Type") == "3") 
+                <a asp-action="Details" asp-route-id="@item.PkStudentId">Details</a> |
+                @if (@Context.Session.GetString("Type") == "3")
             {
                 <a asp-action="Delete" asp-route-id="@item.PkStudentId">Delete</a>
             }

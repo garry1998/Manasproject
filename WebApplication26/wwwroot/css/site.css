@@ -9,10 +9,11 @@ a.navbar-brand {
 .logout {
     background-color: lightgreen;
     font-family: cursive;
-    font-size: 25px;
+    font-size: 21px;
     border-radius: 25px;
-    padding: 10px;
+    padding: 6px;
     float: right;
+    margin-top:8px;
 }
 /* Provide sufficient contrast against white background */
 a {

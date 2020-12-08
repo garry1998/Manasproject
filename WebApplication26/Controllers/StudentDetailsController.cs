@@ -26,15 +26,17 @@ namespace WebApplication26.Controllers
         // GET: StudentDetails
         public async Task<IActionResult> Index()
         {
-            //var CurrentUserIDSession = HttpContext.Session.GetString("name");
-            //if (string.IsNullOrEmpty(CurrentUserIDSession))
-            //{
+            var CurrentUserIDSession = HttpContext.Session.GetString("name");
+            if (string.IsNullOrEmpty(CurrentUserIDSession))
+            {
 
-            //    return RedirectToAction("Index", "Login");
-                
-            //}
-            //else
-            return View(await _context.StudentDetails.ToListAsync());
+                return RedirectToAction("Index", "Login");
+
+            }
+            else
+            {
+                return View(await _context.StudentDetails.ToListAsync());
+            }
         }
 
         // GET: StudentDetails/Details/5
@@ -87,6 +89,7 @@ namespace WebApplication26.Controllers
           
             if (ModelState.IsValid)
             {
+                studentDetail.CreatedDate = DateTime.Now;
                 _context.Add(studentDetail);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -116,7 +119,7 @@ namespace WebApplication26.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PkStudentId,EnrollId,Email,FirstName,LastName,DateOfBirth,Contact,Address,Pswd,Course,FatherName,CreatedDate,IsActive,IsDeleted,PProfilepic")] StudentDetail studentDetail)
+        public async Task<IActionResult> Edit(int id, [Bind("PkStudentId,EnrollId,Email,FirstName,LastName,DateOfBirth,Contact,Address,Pswd,Course,FatherName,CreatedDate,IsActive,IsDeleted,PProfilepic,studentPic")] StudentDetail studentDetail)
         {
             if (id != studentDetail.PkStudentId)
             {
@@ -152,9 +155,9 @@ namespace WebApplication26.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Myprofilee", "StudentDetails");
             }
-            return View(studentDetail);
+            return RedirectToAction("Myprofilee", "StudentDetails");
         }
 
         // GET: StudentDetails/Delete/5

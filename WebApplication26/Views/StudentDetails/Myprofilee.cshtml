@@ -14,9 +14,16 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <style>
+        .navigation {
+            margin: 10px;
+            font-size: large;
+        }
+    </style>
 </head>
-<body style=" background-image: linear-gradient(pink, White, blue);" class=".bg-success m-5">
-    <div class="p-3 mb-2 bg-info text-white">
+<body style=" background-image: linear-gradient(pink, White, blue);" class=".bg-success">
+   
+    
 
 
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar navbar-dark bg-dark border-bottom box-shadow mb-3">
@@ -30,10 +37,10 @@
 
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse ">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-light badge badge-primary text-wrap text-uppercase h1 navigation" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
 
+                        <li class="nav-item">
+                            <a class="nav-link text-light badge badge-primary text-wrap text-uppercase h1 navigation " asp-action="Edit" asp-route-id="@Model.PkStudentId">Edit Profile</a> |
+                        </li>
 
                         @if (@Context.Session.GetString("Type") == "1")
                         {
@@ -47,6 +54,12 @@
                         {
                         <li class="nav-item">
                             <a class="nav-link text-light badge badge-primary text-wrap text-uppercase h1 navigation" asp-area="" asp-controller="StudentDetails" asp-action="Index">StudentDetails</a>
+                        </li>
+                        }
+                        @if (@Context.Session.GetString("Type") == "1")
+                        {
+                        <li class="nav-item">
+                            <a class="nav-link text-light badge badge-primary text-wrap text-uppercase h1 navigation" asp-area="" asp-controller="StudentDetails" asp-action="Myprofilee">My Profile</a>
                         </li>
                         }
 
@@ -68,11 +81,7 @@
 
 
         </nav>
-    </div>
-    <div>
-        <a asp-action="Edit" asp-route-id="@Model.PkStudentId">Edit</a> |
-
-    </div>
+  
     <div class="container">
         <div class="main-body">
 
@@ -86,7 +95,7 @@
                             <div class="d-flex flex-column align-items-center text-center">
                                 @if ((Model.studentPic == null)|| (Model.studentPic == "null"))
                                 {
-                                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Student" class="rounded-circle" width="200">}
+                                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Student" class="rounded-circle" width="300" height="300">}
                                 else
                                 {
                                 <img src="/images/@Model.studentPic" class="rounded-circle" width="200">}
@@ -106,8 +115,10 @@
 
 
                             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-facebook mr-2 icon-inline text-primary"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>Facebook</h6>
-                                <span class="text-secondary">bootdey</span>
+                                <h2><i class="text-secondary">Total Classes:89</i></h2>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                <h2><i class="text-secondary">Total Classes Attended:72</i></h2>
                             </li>
                         </ul>
                     </div>
@@ -166,53 +177,42 @@
                         <div class="col-sm-6 mb-3">
                             <div class="card h-100">
                                 <div class="card-body">
-                                    <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">assignment</i>Project Status</h6>
-                                    <small>Web Design</small>
-                                    <div class="progress mb-3" style="height: 5px">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <h4 class="d-flex align-items-center mb-3">Marks Scored</h4>
+                                    <small></small>
+                                    <div class=" mb-3 m-4" style="height: 5px ">
+                                        <h5><i class="text-secondary">Sem 1 Scores(%):80%</i></h5>
                                     </div>
-                                    <small>Website Markup</small>
-                                    <div class="progress mb-3" style="height: 5px">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class=" mb-3  m-4" style="height: 5px">
+                                        <h5><i class="text-secondary">Sem 2 Scores(%):78%</i></h5>
                                     </div>
-                                    <small>One Page</small>
-                                    <div class="progress mb-3" style="height: 5px">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 89%" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class=" mb-3  m-4" style="height: 5px">
+                                        <h5><i class="text-secondary"> Sem 3 Scores(%):75%</i></h5>
                                     </div>
-                                    <small>Mobile Template</small>
-                                    <div class="progress mb-3" style="height: 5px">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class=" mb-3  m-4" style="height: 5px">
+                                        <h5><i class="text-secondary">Sem 4 Scores(%):75%</i></h5>
                                     </div>
-                                    <small>Backend API</small>
-                                    <div class="progress mb-3" style="height: 5px">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
+                                   
+
+
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-6 mb-3">
                             <div class="card h-100">
                                 <div class="card-body">
-                                    <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">assignment</i>Project Status</h6>
-                                    <small>Web Design</small>
-                                    <div class="progress mb-3" style="height: 5px">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <h4 class="d-flex align-items-center mb-3">Marks Scored</h4>
+                                    <small></small>
+                                    <div class=" mb-3  m-4" style="height: 5px">
+                                        <h5 class="text-secondary">Sem 5 Scores(%):60%</h5>
                                     </div>
-                                    <small>Website Markup</small>
-                                    <div class="progress mb-3" style="height: 5px">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class=" mb-3  m-4" style="height: 5px">
+                                        <h5 class="text-secondary">Sem 6 Scores(%):pending</h5>
                                     </div>
-                                    <small>One Page</small>
-                                    <div class="progress mb-3" style="height: 5px">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 89%" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class=" mb-3  m-4" style="height: 5px">
+                                        <h5 class="text-secondary">Sem 7 Scores(%):pending</h5>
                                     </div>
-                                    <small>Mobile Template</small>
-                                    <div class="progress mb-3" style="height: 5px">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <small>Backend API</small>
-                                    <div class="progress mb-3" style="height: 5px">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class=" mb-3  m-4" style="height: 5px">
+                                        <h5 class="text-secondary" paral>Sem 8 Scores(%):pending</h5>
                                     </div>
                                 </div>
                             </div>
