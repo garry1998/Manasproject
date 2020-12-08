@@ -51,13 +51,23 @@ namespace WebApplication26.Controllers
                 if ((objs.Username == ac.Email) && (objs.Password == ac.Pswd) &&(objs.checktype==ac.FkRoleId))
 
                 {
-                    HttpContext.Session.SetString("Email", ac.Email);
-                    HttpContext.Session.SetString("name", ac.Fname+ac.Lname);
-                    HttpContext.Session.SetString("Type", ac.FkRoleId.ToString());
-                    //this.Session.SetString("TransId", "x001");
-                    //Session["UserId"] = Guid.NewGuid();
+                    if (objs.checktype == 1)
+                    {
+                        HttpContext.Session.SetString("Email", ac.Email);
+                        HttpContext.Session.SetString("name", ac.Fname + ac.Lname);
+                        HttpContext.Session.SetString("Type", ac.FkRoleId.ToString());
+                        return RedirectToAction("Myprofilee", "StudentDetails");
+                    }
+                    else
+                    {
+                        HttpContext.Session.SetString("Email", ac.Email);
+                        HttpContext.Session.SetString("name", ac.Fname + ac.Lname);
+                        HttpContext.Session.SetString("Type", ac.FkRoleId.ToString());
+                        //this.Session.SetString("TransId", "x001");
+                        //Session["UserId"] = Guid.NewGuid();
 
-                    return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Home");
+                    }
                 }
                 else
                 {

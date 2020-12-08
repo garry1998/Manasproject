@@ -122,7 +122,7 @@ namespace WebApplication26.Controllers
             {
                 return NotFound();
             }
-          //  if (studentDetail.PProfilepic.ToString().DefaultIfEmpty()!="")
+           if (studentDetail.PProfilepic!=null)
             {
                 string wwwRootPath = hostEnvironment.WebRootPath;
                 string fileName = Path.GetFileNameWithoutExtension(studentDetail.PProfilepic.FileName);

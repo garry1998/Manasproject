@@ -1,5 +1,5 @@
 ﻿@model WebApplication26.Models.StudentDetail
-
+@using Microsoft.AspNetCore.Http;
 @{
     Layout = null;
 }
@@ -12,19 +12,71 @@
     <title>Myprofilee</title>
     <link href="~/css/MYprofile.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
 </head>
-<body style=" background-image: linear-gradient(pink, White, blue);">
+<body style=" background-image: linear-gradient(pink, White, blue);" class=".bg-success m-5">
+    <div class="p-3 mb-2 bg-info text-white">
 
-   
+
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar navbar-dark bg-dark border-bottom box-shadow mb-3">
+            <div class="ml-5 mr-5 ">
+
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse ">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-light badge badge-primary text-wrap text-uppercase h1 navigation" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+
+
+                        @if (@Context.Session.GetString("Type") == "1")
+                        {
+                        <li class="nav-item">
+                            <a class="nav-link text-light badge badge-primary text-wrap text-uppercase h1 navigation" asp-area="" asp-controller="AttendanceDetails" asp-action="Index">AttendanceDetails</a>
+                        </li>
+                        }
+
+
+                        @if (@Context.Session.GetString("Type") == "1")
+                        {
+                        <li class="nav-item">
+                            <a class="nav-link text-light badge badge-primary text-wrap text-uppercase h1 navigation" asp-area="" asp-controller="StudentDetails" asp-action="Index">StudentDetails</a>
+                        </li>
+                        }
+
+
+
+
+
+                        <li class="nav-item">
+                            <button class="logout" onclick="location.href='@Url.Action("Logout", "Login")'">logout</button>
+                        </li>
+
+                    </ul>
+
+
+                </div>
+
+            </div>
+
+
+
+        </nav>
+    </div>
     <div>
         <a asp-action="Edit" asp-route-id="@Model.PkStudentId">Edit</a> |
-        <a asp-action="Index">Back to List</a>
+
     </div>
     <div class="container">
         <div class="main-body">
 
             <!-- Breadcrumb -->
-          
             <!-- /Breadcrumb -->
 
             <div class="row gutters-sm">
@@ -34,12 +86,12 @@
                             <div class="d-flex flex-column align-items-center text-center">
                                 @if ((Model.studentPic == null)|| (Model.studentPic == "null"))
                                 {
-                                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Student" class="rounded-circle" width="200">}
+                                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Student" class="rounded-circle" width="200">}
                                 else
                                 {
-                                    <img src="/images/@Model.studentPic"  class="rounded-circle" width="200">}
+                                <img src="/images/@Model.studentPic" class="rounded-circle" width="200">}
 
-                                
+
                                 <div class="mt-3">
                                     <h4>@Model.FirstName</h4>
                                     <p class="text-secondary mb-1">@Model.Course</p>
@@ -52,7 +104,7 @@
                     <div class="card mt-3">
                         <ul class="list-group list-group-flush">
 
-                       
+
                             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                 <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-facebook mr-2 icon-inline text-primary"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>Facebook</h6>
                                 <span class="text-secondary">bootdey</span>
@@ -77,7 +129,7 @@
                                     <h6 class="mb-0">Email</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                   @Model.Email
+                                    @Model.Email
                                 </div>
                             </div>
                             <hr>
@@ -104,7 +156,7 @@
                                     <h6 class="mb-0">DOB</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                   @Model.DateOfBirth
+                                    @Model.DateOfBirth
                                 </div>
                             </div>
 
