@@ -24,9 +24,9 @@
   flex-wrap: wrap;
 }
 .control-label {
- 
+
     color: black;
-    font-size: larger;
+    font-size: l;
 }
 .row-space {
   -webkit-box-pack: justify;

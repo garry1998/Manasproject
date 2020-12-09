@@ -459,7 +459,8 @@ C:\Git\Manas Project\WebApplication26\obj\Debug\netcoreapp3.1\WebApplication26.g
 C:\Git\Manas Project\WebApplication26\bin\Debug\netcoreapp3.1\Properties\ServiceDependencies\testmyfirst1221 - Web Deploy\profile.arm.json
 C:\Git\Manas Project\WebApplication26\obj\Debug\netcoreapp3.1\Razor\Views\StudentDetails\Myprofile.cshtml.g.cs
 C:\Git\Manas Project\WebApplication26\obj\Debug\netcoreapp3.1\Razor\Views\StudentDetails\Myprofilee.cshtml.g.cs
-C:\Git\Manas Project\WebApplication26\obj\Debug\netcoreapp3.1\WebApplication26.csproj.CoreCompileInputs.cache
-C:\Git\Manas Project\WebApplication26\obj\Debug\netcoreapp3.1\WebApplication26.MvcApplicationPartsAssemblyInfo.cache
 C:\Git\Manas Project\WebApplication26\bin\Debug\netcoreapp3.1\Properties\ServiceDependencies\Manasproject - Web Deploy\profile.arm.json
 C:\Git\Manas Project\WebApplication26\bin\Debug\netcoreapp3.1\Properties\ServiceDependencies\Manasproj - Web Deploy\profile.arm.json
+C:\Git\Manas Project\WebApplication26\bin\Debug\netcoreapp3.1\Polly.dll
+C:\Git\Manas Project\WebApplication26\obj\Debug\netcoreapp3.1\WebApplication26.csproj.CoreCompileInputs.cache
+C:\Git\Manas Project\WebApplication26\obj\Debug\netcoreapp3.1\WebApplication26.MvcApplicationPartsAssemblyInfo.cache

@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<WebApplication26.Models.MstSubject>
+@using Microsoft.AspNetCore.Http;
 
 @{
     ViewData["Title"] = "Index";
@@ -15,33 +16,34 @@
             <th>
                 @Html.DisplayNameFor(model => model.SubjectName)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.IsActive)
-            </th>
+            </th>*@
             <th>
-                @Html.DisplayNameFor(model => model.FkSem)
+              Semester
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.SubjectName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsActive)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FkSem.PkSemId)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.PkSubjectId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.PkSubjectId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.PkSubjectId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SubjectName)
+                </td>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.IsActive)
+                </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.FkSem.PkSemId)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.PkSubjectId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.PkSubjectId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.PkSubjectId">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

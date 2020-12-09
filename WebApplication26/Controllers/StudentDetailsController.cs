@@ -97,7 +97,7 @@ namespace WebApplication26.Controllers
                         {
                             if (a.FkSemId == i)
                             {
-                                l1.Add((float)(((a.SessionalMarks + a.MainExamMarks) * 100) / a.TotalMarks));
+                                l1.Add(Math.Round((float)(((a.SessionalMarks + a.MainExamMarks) * 100) / a.TotalMarks),2));
                                 check = 1;
                             }
                         }

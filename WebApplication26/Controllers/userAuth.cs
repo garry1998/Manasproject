@@ -7,17 +7,21 @@ using System.Web.Mvc.Filters;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Polly;
 using ActionFilterAttribute = Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute;
 
 namespace WebApplication26.Controllers
 {
+   
     public class userAuth : ActionFilterAttribute, IAuthenticationFilter
     {
+      
         public void OnAuthentication(AuthenticationContext filterContext)
         {
-            //var CurrentUserIDSession = HttpContext.Session.GetString("name");
-          
-            //var check = Session["name"];
+
+
+        //  var CurrentUserIDSession = HttpContext.Session.GetString("Type");
+            
             //if (string.IsNullOrEmpty(check))
             //{
 

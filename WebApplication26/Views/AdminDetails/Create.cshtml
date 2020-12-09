@@ -58,7 +58,7 @@
                 <span asp-validation-for="FatherName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary" onclick="myFunction()" />
             </div>
         </form>
     </div>
@@ -67,7 +67,11 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-
+<script>
+    function myFunction() {
+        alert("Account created.Please wait till admin approves your account");
+    }
+</script>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

@@ -233,3 +233,4 @@ C:\Git\Manas Project\WebApplication26\obj\Release\netcoreapp3.1\WebApplication26
 C:\Git\Manas Project\WebApplication26\obj\Release\netcoreapp3.1\WebApplication26.pdb
 C:\Git\Manas Project\WebApplication26\obj\Release\netcoreapp3.1\WebApplication26.genruntimeconfig.cache
 C:\Git\Manas Project\WebApplication26\bin\Release\netcoreapp3.1\Properties\ServiceDependencies\Manasproj - Web Deploy\profile.arm.json
+C:\Git\Manas Project\WebApplication26\bin\Release\netcoreapp3.1\Polly.dll

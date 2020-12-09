@@ -38,7 +38,7 @@ namespace WebApplication26.Controllers
         public ActionResult Index(Logincs objs)
 
         { var ac= (from s in _context.MstUsers
-                                 where s.Email == objs.Username
+                                 where s.Email == objs.Username 
                                  select s).SingleOrDefault();
 
 
@@ -50,12 +50,17 @@ namespace WebApplication26.Controllers
             }
             else
             {
-                if ((objs.Username == ac.Email) && (objs.Password == ac.Pswd) &&(objs.checktype==ac.FkRoleId))
+                if (ac.IsActive == false) 
+                {
+                    ModelState.AddModelError("", "Account not approved");
+                    return PartialView(objs);
+                }
+                else if ((objs.Username == ac.Email) && (objs.Password == ac.Pswd) && (objs.checktype == ac.FkRoleId))
 
                 {
                     if (objs.checktype == 1)
                     {
-                     
+
                         HttpContext.Session.SetString("Email", ac.Email);
                         HttpContext.Session.SetString("name", ac.Fname + ac.Lname);
                         HttpContext.Session.SetString("Type", ac.FkRoleId.ToString());
@@ -72,6 +77,7 @@ namespace WebApplication26.Controllers
                         return RedirectToAction("Index", "Home");
                     }
                 }
+
                 else
                 {
                     ModelState.AddModelError("", "Failed");

@@ -1,41 +1,51 @@
 ﻿@model IEnumerable<WebApplication26.Models.MstDepartment>
+@using Microsoft.AspNetCore.Http;
 
 @{
     ViewData["Title"] = "Index";
 }
 
 <h1>Index</h1>
+@if (@Context.Session.GetString("Type") == "3")
+{
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    }
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.DepartmentName)
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.IsActive)
+                    </th>*@
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DepartmentName)
+                    </td>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.IsActive)
+                        </td>*@
+                    @if (@Context.Session.GetString("Type") == "3")
+                    {
+                        <td>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.DepartmentName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsActive)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.DepartmentName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsActive)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.PkDeptId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.PkDeptId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.PkDeptId">Delete</a>
-            </td>
-        </tr>
+                            <a asp-action="Edit" asp-route-id="@item.PkDeptId">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.PkDeptId">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.PkDeptId">Delete</a>
+
+
+                        </td>
 }
-    </tbody>
-</table>
+                </tr>
+            }
+        </tbody>
+    </table>

@@ -29,7 +29,7 @@
                 <ul class="navbar-nav flex-grow-1">
 
                     <li class="nav-item">
-                        <a class="nav-link text-light badge badge-primary text-wrap text-uppercase h1 navigation" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        <a class="nav-link text-light badge badge-primary bg-primary text-wrap text-uppercase h1 navigation" style="padding:5px" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                     </li>
                     <li class="nav-item">
                         <button class="logout" onclick="location.href='@Url.Action("Logout", "Login")'">logout</button>
@@ -107,7 +107,7 @@
                     <span asp-validation-for="FatherName" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary" />
+                    <input type="submit" value="Create" class="btn btn-primary" onclick="myFunction()" />
                 </div>
             </div>
         </div>
@@ -123,5 +123,11 @@
     @section Scripts {
         @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     }
+    <script>
+        function myFunction() {
+            alert("Account created.Please wait till admin approves your account");
+        }
+    </script>
+
 </body>
 </html>

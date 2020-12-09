@@ -22,13 +22,13 @@
                 @Html.DisplayNameFor(model => model.TotalMarks)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FkSem)
+               Semester
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.FkStud)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FkSub)
+                Subject
             </th>
             <th></th>
         </tr>
@@ -49,10 +49,10 @@
                 @Html.DisplayFor(modelItem => item.FkSem.PkSemId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FkStud.Contact)
+                @item.FkStud.FirstName  @item.FkStud.LastName
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FkSub.PkSubjectId)
+                @Html.DisplayFor(modelItem => item.FkSub.SubjectName)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.PkMarksId">Edit</a> |

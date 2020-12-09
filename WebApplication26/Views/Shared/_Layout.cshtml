@@ -29,10 +29,14 @@
                 </button>
 
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse ">
+
                     <ul class="navbar-nav flex-grow-1">
+                        @if (@Context.Session.GetString("Type") != "1")
+                        {
                         <li class="nav-item">
                             <a class="nav-link text-light badge badge-primary text-wrap text-uppercase h1 navigation" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
+                        }
                         @if (@Context.Session.GetString("Type") == "1")
                         {
                         <li class="nav-item">
@@ -46,13 +50,13 @@
                             <a class="nav-link text-light badge badge-primary text-wrap text-uppercase h1 navigation" asp-area="" asp-controller="AdminDetails" asp-action="Index">AdminDetails</a>
                         </li>
                         }
-                        @if ((@Context.Session.GetString("Type") == "1")&& (@Context.Session.GetString("Type") == "2"))
+                        @if ((@Context.Session.GetString("Type") == "2")||(@Context.Session.GetString("Type") == "1"))
                         {
                         <li class="nav-item">
                             <a class="nav-link text-light badge badge-primary text-wrap text-uppercase h1 navigation" asp-area="" asp-controller="AttendanceDetails" asp-action="Index">AttendanceDetails</a>
                         </li>
                         }
-                        @if (@Context.Session.GetString("Type") == "2")
+                        @if ((@Context.Session.GetString("Type") == "2")||(@Context.Session.GetString("Type") == "3"))
                         {
                         <li class="nav-item">
                             <a class="nav-link text-light badge badge-primary text-wrap text-uppercase h1 navigation" asp-area="" asp-controller="FacultyDetails" asp-action="Index">FacultyDetails</a>
@@ -64,13 +68,13 @@
                             <a class="nav-link text-light badge badge-primary text-wrap text-uppercase h1 navigation" asp-area="" asp-controller="MarksDetails" asp-action="Index">MarksDetails</a>
                         </li>
                         }
-                        @if (@Context.Session.GetString("Type") == "1")
+                        @if ((@Context.Session.GetString("Type") == "2")||(@Context.Session.GetString("Type") == "1"))
                         {
                         <li class="nav-item">
                             <a class="nav-link text-light badge badge-primary text-wrap text-uppercase h1 navigation" asp-area="" asp-controller="StudentDetails" asp-action="Index">StudentDetails</a>
                         </li>
                         }
-                        @if (@Context.Session.GetString("Type") == "2")
+                        @if ((@Context.Session.GetString("Type") == "2")||(@Context.Session.GetString("Type") == "3"))
                         {
                         <li class="nav-item">
                             <a class="nav-link text-light badge badge-primary text-wrap text-uppercase h1 navigation" asp-area="" asp-controller="MstSemesters" asp-action="Index">MstSemesters</a><br />
@@ -88,7 +92,7 @@
                             <a class="nav-link text-light badge badge-primary text-wrap text-uppercase h1 navigation" asp-area="" asp-controller="MstRoles" asp-action="Index">MstRoles</a>
                         </li>
                         }
-                        @if (@Context.Session.GetString("Type") == "2")
+                        @if ((@Context.Session.GetString("Type") == "2")||(@Context.Session.GetString("Type") == "3"))
                         {
                         <li class="nav-item">
                             <a class="nav-link text-light badge badge-primary text-wrap text-uppercase h1 navigation" asp-area="" asp-controller="MstDepartments" asp-action="Index">MstDepartments</a>
@@ -99,18 +103,19 @@
                             <a class="nav-link text-light badge badge-primary text-wrap text-uppercase h1 navigation" asp-area="" asp-controller="MstSubjects" asp-action="Index">MstSubjects</a>
                         </li>
                         }
-                        <li class="nav-item">
-                            <button class="logout" onclick="location.href='@Url.Action("Logout", "Login")'">logout</button>
-                        </li>
+
+
 
                     </ul>
 
-                  
+
                 </div>
 
             </div>
 
-
+            <div>
+                <button class="logout" onclick="location.href='@Url.Action("Logout", "Login")'">Logout</button>
+            </div>
 
         </nav>
       
