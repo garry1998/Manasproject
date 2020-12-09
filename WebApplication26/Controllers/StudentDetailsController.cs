@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using WebApplication26.Models;
+using System.Collections;
 
 namespace WebApplication26.Controllers
 {
@@ -59,19 +60,61 @@ namespace WebApplication26.Controllers
       
         public async Task<IActionResult> Myprofilee(int? id)
         {var Email = HttpContext.Session.GetString("Email");
-            if (Email == null)
+            var CurrentUserIDSession = HttpContext.Session.GetString("name");
+            if (string.IsNullOrEmpty(CurrentUserIDSession))
             {
-                return NotFound();
-            }
 
-            var studentDetail = await _context.StudentDetails
-                .FirstOrDefaultAsync(m => m.Email==Email);
-            if (studentDetail == null)
+                return RedirectToAction("Index", "Login");
+
+            }
+            else
             {
-                return NotFound();
-            }
+                if (Email == null)
+                {
+                    return NotFound();
+                }
+                var studentDetail = await _context.StudentDetails
+                 .FirstOrDefaultAsync(m => m.Email == Email);
+                id = studentDetail.PkStudentId;
 
-            return View(studentDetail);
+                ViewBag.attendance = _context.AttendanceDetails.Count(a => a.FkStudId == id);
+
+                ViewBag.attended = _context.AttendanceDetails.Count(a => a.FkStudId == id && a.Attendance == "Present");
+                if (ViewBag.attendance == 0)
+                {
+                    ViewBag.attendance = "Not updated";
+                    ViewBag.attended = "Not updated";
+                }
+                var list = _context.MarksDetails.Where(a => a.FkStudId == id).OrderBy(a => a.FkSemId);
+                var count = _context.MarksDetails.Count(a => a.FkStudId == id);
+                ArrayList l1 = new ArrayList();
+                for (int i = 1; i < 9; i++)
+                {
+                    int check = 0;
+                    if (count != 0)
+                    {
+                        foreach (var a in list)
+                        {
+                            if (a.FkSemId == i)
+                            {
+                                l1.Add((float)(((a.SessionalMarks + a.MainExamMarks) * 100) / a.TotalMarks));
+                                check = 1;
+                            }
+                        }
+                    }
+                    if (check == 0) { l1.Add("Pending"); }
+
+                }
+
+                ViewBag.marks = l1;
+
+                if (studentDetail == null)
+                {
+                    return NotFound();
+                }
+
+                return View(studentDetail);
+            }
         }
         // GET: StudentDetails/Create
         public IActionResult Create()

@@ -58,7 +58,7 @@ namespace WebApplication26.Controllers
         // GET: FacultyDetails/Create
         public IActionResult Create()
         {
-            ViewData["FkDeptId"] = new SelectList(_context.MstDepartments, "PkDeptId", "PkDeptId");
+            ViewData["FkDeptId"] = new SelectList(_context.MstDepartments, "PkDeptId", "DepartmentName");
             return View();
         }
 

@@ -55,6 +55,7 @@ namespace WebApplication26.Controllers
                 {
                     if (objs.checktype == 1)
                     {
+                     
                         HttpContext.Session.SetString("Email", ac.Email);
                         HttpContext.Session.SetString("name", ac.Fname + ac.Lname);
                         HttpContext.Session.SetString("Type", ac.FkRoleId.ToString());

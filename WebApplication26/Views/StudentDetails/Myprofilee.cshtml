@@ -37,15 +37,16 @@
 
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse ">
                     <ul class="navbar-nav flex-grow-1">
-
-                        <li class="nav-item">
-                            <a class="nav-link text-light badge badge-primary text-wrap text-uppercase h1 navigation " asp-action="Edit" asp-route-id="@Model.PkStudentId">Edit Profile</a> |
-                        </li>
-
                         @if (@Context.Session.GetString("Type") == "1")
                         {
                         <li class="nav-item">
-                            <a class="nav-link text-light badge badge-primary text-wrap text-uppercase h1 navigation" asp-area="" asp-controller="AttendanceDetails" asp-action="Index">AttendanceDetails</a>
+                            <a class="nav-link text-light badge badge-primary text-wrap text-uppercase  navigation" style="padding:5px" asp-action="Edit" asp-route-id="@Model.PkStudentId">Edit Profile</a>
+                        </li>
+                        }
+                        @if (@Context.Session.GetString("Type") == "1")
+                        {
+                        <li class="nav-item">
+                            <a class="nav-link text-light badge badge-primary text-wrap text-uppercase  navigation" style="padding:5px" asp-area="" asp-controller="AttendanceDetails" asp-action="Index">AttendanceDetails</a>
                         </li>
                         }
 
@@ -53,13 +54,13 @@
                         @if (@Context.Session.GetString("Type") == "1")
                         {
                         <li class="nav-item">
-                            <a class="nav-link text-light badge badge-primary text-wrap text-uppercase h1 navigation" asp-area="" asp-controller="StudentDetails" asp-action="Index">StudentDetails</a>
+                            <a class="nav-link text-light badge badge-primary text-wrap text-uppercase  navigation " style="padding:5px" asp-area="" asp-controller="StudentDetails" asp-action="Index">StudentDetails</a>
                         </li>
                         }
                         @if (@Context.Session.GetString("Type") == "1")
                         {
                         <li class="nav-item">
-                            <a class="nav-link text-light badge badge-primary text-wrap text-uppercase h1 navigation" asp-area="" asp-controller="StudentDetails" asp-action="Myprofilee">My Profile</a>
+                            <a class="nav-link text-light badge badge-primary text-wrap text-uppercase  navigation " style="padding:5px" asp-area="" asp-controller="StudentDetails" asp-action="Myprofilee">My Profile</a>
                         </li>
                         }
 
@@ -98,7 +99,7 @@
                                 <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Student" class="rounded-circle" width="300" height="300">}
                                 else
                                 {
-                                <img src="/images/@Model.studentPic" class="rounded-circle" width="200">}
+                                <img src="/images/@Model.studentPic" class="rounded-circle" width="300" height="250">}
 
 
                                 <div class="mt-3">
@@ -115,17 +116,17 @@
 
 
                             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                <h2><i class="text-secondary">Total Classes:89</i></h2>
+                                <h3><i class="text-secondary">Total Classes:@ViewBag.attendance</i></h3>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                <h2><i class="text-secondary">Total Classes Attended:72</i></h2>
+                                <h3><i class="text-secondary">Total Classes Attended:@ViewBag.attended</i></h3>
                             </li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-md-8">
                     <div class="card mb-3">
-                        <div class="card-body">
+                        <div class="card-body "style="padding: 1rem;">
                             <div class="row">
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Full Name</h6>
@@ -176,20 +177,20 @@
                     <div class="row gutters-sm">
                         <div class="col-sm-6 mb-3">
                             <div class="card h-100">
-                                <div class="card-body">
+                                <div class="card-body" style="padding: 1rem;">
                                     <h4 class="d-flex align-items-center mb-3">Marks Scored</h4>
                                     <small></small>
-                                    <div class=" mb-3 m-4" style="height: 5px ">
-                                        <h5><i class="text-secondary">Sem 1 Scores(%):80%</i></h5>
+                                    <div class=" mb-3 m-5" style="height: 5px ">
+                                        <h5><i class="text-secondary">Sem 1 Scores(%):@ViewBag.marks[0]</i></h5>
                                     </div>
-                                    <div class=" mb-3  m-4" style="height: 5px">
-                                        <h5><i class="text-secondary">Sem 2 Scores(%):78%</i></h5>
+                                    <div class=" mb-3  m-5" style="height: 5px">
+                                        <h5><i class="text-secondary">Sem 2 Scores(%):@ViewBag.marks[1]</i></h5>
                                     </div>
-                                    <div class=" mb-3  m-4" style="height: 5px">
-                                        <h5><i class="text-secondary"> Sem 3 Scores(%):75%</i></h5>
+                                    <div class=" mb-3  m-5" style="height: 5px">
+                                        <h5><i class="text-secondary"> Sem 3 Scores(%):@ViewBag.marks[2]</i></h5>
                                     </div>
-                                    <div class=" mb-3  m-4" style="height: 5px">
-                                        <h5><i class="text-secondary">Sem 4 Scores(%):75%</i></h5>
+                                    <div class=" mb-3  m-5" style="height: 5px">
+                                        <h5><i class="text-secondary">Sem 4 Scores(%):@ViewBag.marks[3]</i></h5>
                                     </div>
                                    
 
@@ -202,17 +203,17 @@
                                 <div class="card-body">
                                     <h4 class="d-flex align-items-center mb-3">Marks Scored</h4>
                                     <small></small>
-                                    <div class=" mb-3  m-4" style="height: 5px">
-                                        <h5 class="text-secondary">Sem 5 Scores(%):60%</h5>
+                                    <div class=" mb-3  m-5" style="height: 5px">
+                                        <h5 class="text-secondary">Sem 5 Scores(%):@ViewBag.marks[4]</h5>
                                     </div>
-                                    <div class=" mb-3  m-4" style="height: 5px">
-                                        <h5 class="text-secondary">Sem 6 Scores(%):pending</h5>
+                                    <div class=" mb-3  m-5" style="height: 5px">
+                                        <h5 class="text-secondary">Sem 6 Scores(%):@ViewBag.marks[5]</h5>
                                     </div>
-                                    <div class=" mb-3  m-4" style="height: 5px">
-                                        <h5 class="text-secondary">Sem 7 Scores(%):pending</h5>
+                                    <div class=" mb-3  m-5" style="height: 5px">
+                                        <h5 class="text-secondary">Sem 7 Scores(%):@ViewBag.marks[6]</h5>
                                     </div>
-                                    <div class=" mb-3  m-4" style="height: 5px">
-                                        <h5 class="text-secondary" paral>Sem 8 Scores(%):pending</h5>
+                                    <div class=" mb-3  m-5" style="height: 5px">
+                                        <h5 class="text-secondary" paral>Sem 8 Scores(%):@ViewBag.marks[7]</h5>
                                     </div>
                                 </div>
                             </div>

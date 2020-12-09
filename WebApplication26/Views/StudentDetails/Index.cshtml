@@ -107,8 +107,8 @@
                 @if ((@Context.Session.GetString("Type") == "3") || (@Context.Session.GetString("Email") == item.Email))
             {
                 <a asp-action="Edit" asp-route-id="@item.PkStudentId">Edit</a>
-            }|
-                <a asp-action="Details" asp-route-id="@item.PkStudentId">Details</a> |
+            }
+               | <a asp-action="Details" asp-route-id="@item.PkStudentId">Details</a> |
                 @if (@Context.Session.GetString("Type") == "3")
             {
                 <a asp-action="Delete" asp-route-id="@item.PkStudentId">Delete</a>

@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using WebApplication26.Models;
 
@@ -21,7 +23,31 @@ namespace WebApplication26.Controllers
         // GET: AttendanceDetails
         public async Task<IActionResult> Index()
         {
-            var project1211Context = _context.AttendanceDetails.Include(a => a.FkStud);
+            var date = DateTime.Today;
+          
+
+
+           
+            var project1211Context1 = _context.AttendanceDetails.FirstOrDefault(a => a.CreatedDate.Value.Date == date);
+            if ((HttpContext.Session.GetString("Type") == "2")&&(project1211Context1==null))
+            {
+                var db = new project1211Context();
+                using (SqlConnection connection = new SqlConnection("Server=tcp:testserver1211.database.windows.net,1433;Initial Catalog=project1211;Persist Security Info=False;User ID=Admin123;Password=Garry@123;MultipleActiveResultSets=True;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"))
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = "exec p1";
+
+
+                    connection.Open();
+
+                    command.ExecuteNonQuery();
+
+                    connection.Close();
+                }
+
+
+            }
+            var project1211Context = _context.AttendanceDetails.Include(a => a.FkStud).OrderByDescending(a => a.CreatedDate);
             return View(await project1211Context.ToListAsync());
         }
 
@@ -60,6 +86,7 @@ namespace WebApplication26.Controllers
         {
             if (ModelState.IsValid)
             {
+                attendanceDetail.CreatedDate = DateTime.Now;
                 _context.Add(attendanceDetail);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

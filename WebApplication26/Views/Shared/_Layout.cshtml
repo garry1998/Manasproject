@@ -46,7 +46,7 @@
                             <a class="nav-link text-light badge badge-primary text-wrap text-uppercase h1 navigation" asp-area="" asp-controller="AdminDetails" asp-action="Index">AdminDetails</a>
                         </li>
                         }
-                        @if (@Context.Session.GetString("Type") == "1")
+                        @if ((@Context.Session.GetString("Type") == "1")&& (@Context.Session.GetString("Type") == "2"))
                         {
                         <li class="nav-item">
                             <a class="nav-link text-light badge badge-primary text-wrap text-uppercase h1 navigation" asp-area="" asp-controller="AttendanceDetails" asp-action="Index">AttendanceDetails</a>
