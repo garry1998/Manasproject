@@ -4,9 +4,9 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
 
-<h4>AdminDetail</h4>
+
+<h4 class="text-center">Admin Registration</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -44,8 +44,10 @@
             </div>
             <div class="form-group">
                 <label asp-for="Pswd" class="control-label"></label>
-                <input asp-for="Pswd" class="form-control" />
+                <input asp-for="Pswd" id="Pswd" type="password" class="form-control" />
                 <span asp-validation-for="Pswd" class="text-danger"></span>
+                <input type="checkbox" onclick="myFunction()">Show Password
+
             </div>
             <div class="form-group">
                 <label asp-for="Address" class="control-label"></label>
@@ -72,6 +74,17 @@
         alert("Account created.Please wait till admin approves your account");
     }
 </script>
+<script>
+    function myFunction() {
+        var x = document.getElementById("Pswd");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+</script>
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

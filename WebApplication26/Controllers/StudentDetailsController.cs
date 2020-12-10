@@ -100,9 +100,11 @@ namespace WebApplication26.Controllers
                                 l1.Add(Math.Round((float)(((a.SessionalMarks + a.MainExamMarks) * 100) / a.TotalMarks),2));
                                 check = 1;
                             }
+                            
                         }
+                        if (check == 0) { l1.Add("Pending"); }
                     }
-                    if (check == 0) { l1.Add("Pending"); }
+                  
 
                 }
 
@@ -132,6 +134,27 @@ namespace WebApplication26.Controllers
           
             if (ModelState.IsValid)
             {
+                var ac = Convert.ToDateTime(studentDetail.DateOfBirth);
+
+                DateTime PresentYear = DateTime.Now;
+                TimeSpan ts = PresentYear - ac;
+                if (ts.Days > 0)
+                {
+                    DateTime Age = DateTime.MinValue.AddDays(ts.Days);
+                    if (Age.Year - 1 < 18)
+                    {
+                        ModelState.AddModelError("", "Age cant be less than 18");
+                        return View(studentDetail);
+                    }
+                }
+                else 
+                {
+                    ModelState.AddModelError("", "Dob cant be future date");
+                    return View(studentDetail);
+                }
+
+                if (studentDetail.PkStudentId == 0 || studentDetail.Email == null || studentDetail.Pswd == null || studentDetail.FirstName == null) { return View(studentDetail); }
+               
                 studentDetail.CreatedDate = DateTime.Now;
                 _context.Add(studentDetail);
                 await _context.SaveChangesAsync();

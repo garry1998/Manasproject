@@ -66,6 +66,26 @@ namespace WebApplication26.Controllers
         {
             if (ModelState.IsValid)
             {
+                var ac = Convert.ToDateTime(adminDetail.DateOfBirth);
+
+                DateTime PresentYear = DateTime.Now;
+                TimeSpan ts = PresentYear - ac;
+                if (ts.Days > 0)
+                {
+                    DateTime Age = DateTime.MinValue.AddDays(ts.Days);
+                    if (Age.Year - 1 < 18)
+                    {
+                        ModelState.AddModelError("", "Age cant be less than 18");
+                        return View(adminDetail);
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Dob cant be future date");
+                    return View(adminDetail);
+                }
+                if (adminDetail.PkAdminId == 0 || adminDetail.Email == null || adminDetail.Pswd == null || adminDetail.FirstName == null) { return View(adminDetail); }
+              
                 _context.Add(adminDetail);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

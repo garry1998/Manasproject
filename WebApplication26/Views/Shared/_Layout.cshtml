@@ -8,12 +8,7 @@
     <title>@ViewData["Title"] - WebApplication26</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-    <style>
-        .navigation {
-            margin: 10px;
-            font-size: large;
-        }
-    </style>
+  
 </head>
 <body>
     <header>
@@ -47,81 +42,86 @@
                         {
 
                         <li class="nav-item">
-                            <a class="nav-link text-light badge badge-primary text-wrap text-uppercase h1 navigation" asp-area="" asp-controller="AdminDetails" asp-action="Index">AdminDetails</a>
+                            <a class="nav-link text-light badge badge-primary text-wrap text-uppercase h1 navigation" asp-area="" asp-controller="AdminDetails" asp-action="Index">Admin Details</a>
                         </li>
                         }
                         @if ((@Context.Session.GetString("Type") == "2")||(@Context.Session.GetString("Type") == "1"))
                         {
                         <li class="nav-item">
-                            <a class="nav-link text-light badge badge-primary text-wrap text-uppercase h1 navigation" asp-area="" asp-controller="AttendanceDetails" asp-action="Index">AttendanceDetails</a>
+                            <a class="nav-link text-light badge badge-primary text-wrap text-uppercase h1 navigation" asp-area="" asp-controller="AttendanceDetails" asp-action="Index">Attendance Details</a>
                         </li>
                         }
                         @if ((@Context.Session.GetString("Type") == "2")||(@Context.Session.GetString("Type") == "3"))
                         {
                         <li class="nav-item">
-                            <a class="nav-link text-light badge badge-primary text-wrap text-uppercase h1 navigation" asp-area="" asp-controller="FacultyDetails" asp-action="Index">FacultyDetails</a>
+                            <a class="nav-link text-light badge badge-primary text-wrap text-uppercase h1 navigation" asp-area="" asp-controller="FacultyDetails" asp-action="Index">Faculty Details</a>
                         </li>
                         }
                         @if (@Context.Session.GetString("Type") == "2")
                         {
                         <li class="nav-item">
-                            <a class="nav-link text-light badge badge-primary text-wrap text-uppercase h1 navigation" asp-area="" asp-controller="MarksDetails" asp-action="Index">MarksDetails</a>
+                            <a class="nav-link text-light badge badge-primary text-wrap text-uppercase h1 navigation" asp-area="" asp-controller="MarksDetails" asp-action="Index">Marks Details</a>
                         </li>
                         }
-                        @if ((@Context.Session.GetString("Type") == "2")||(@Context.Session.GetString("Type") == "1"))
+                        @if (@Context.Session.GetString("Type") != null)
                         {
                         <li class="nav-item">
-                            <a class="nav-link text-light badge badge-primary text-wrap text-uppercase h1 navigation" asp-area="" asp-controller="StudentDetails" asp-action="Index">StudentDetails</a>
+                            <a class="nav-link text-light badge badge-primary text-wrap text-uppercase h1 navigation" asp-area="" asp-controller="StudentDetails" asp-action="Index">Student Details</a>
                         </li>
                         }
-                        @if ((@Context.Session.GetString("Type") == "2")||(@Context.Session.GetString("Type") == "3"))
-                        {
-                        <li class="nav-item">
-                            <a class="nav-link text-light badge badge-primary text-wrap text-uppercase h1 navigation" asp-area="" asp-controller="MstSemesters" asp-action="Index">MstSemesters</a><br />
-                        </li>
-                        }
+
+                        @*@if ((@Context.Session.GetString("Type") == "2")||(@Context.Session.GetString("Type") == "3"))
+        {
+        <li class="nav-item">
+            <a class="nav-link text-light badge badge-primary text-wrap text-uppercase h1 navigation" asp-area="" asp-controller="MstSemesters" asp-action="Index">MstSemesters</a><br />
+        </li>
+        }*@
                         @if (@Context.Session.GetString("Type") == "4")
                         {
                         <li class="nav-item">
-                            <a class="nav-link text-light badge badge-primary text-wrap text-uppercase h1 navigation" asp-area="" asp-controller="MstUsers" asp-action="Index">MstUser</a>
+                            <a class="nav-link text-light badge badge-primary text-wrap text-uppercase h1 navigation" asp-area="" asp-controller="MstUsers" asp-action="Index">User</a>
                         </li>
                         }
                         @if (@Context.Session.GetString("Type") == "3")
                         {
                         <li class="nav-item">
-                            <a class="nav-link text-light badge badge-primary text-wrap text-uppercase h1 navigation" asp-area="" asp-controller="MstRoles" asp-action="Index">MstRoles</a>
+                            <a class="nav-link text-light badge badge-primary text-wrap text-uppercase h1 navigation" asp-area="" asp-controller="MstRoles" asp-action="Index">Roles</a>
                         </li>
                         }
                         @if ((@Context.Session.GetString("Type") == "2")||(@Context.Session.GetString("Type") == "3"))
                         {
                         <li class="nav-item">
-                            <a class="nav-link text-light badge badge-primary text-wrap text-uppercase h1 navigation" asp-area="" asp-controller="MstDepartments" asp-action="Index">MstDepartments</a>
+                            <a class="nav-link text-light badge badge-primary text-wrap text-uppercase h1 navigation" asp-area="" asp-controller="MstDepartments" asp-action="Index">Departments</a>
                         </li>
                         }  @if (@Context.Session.GetString("Type") == "2")
                         {
                         <li class="nav-item">
-                            <a class="nav-link text-light badge badge-primary text-wrap text-uppercase h1 navigation" asp-area="" asp-controller="MstSubjects" asp-action="Index">MstSubjects</a>
+                            <a class="nav-link text-light badge badge-primary text-wrap text-uppercase h1 navigation" asp-area="" asp-controller="MstSubjects" asp-action="Index">Subjects</a>
                         </li>
                         }
 
-
+                        @if (@Context.Session.GetString("Type") != null)
+                        {
+                        <button class="logout" onclick="location.href='@Url.Action("Logout", "Login")'">Logout</button>
+                    }
 
                     </ul>
-
-
+                    
+                      
+                    
                 </div>
-
+                  
+            
+                        
             </div>
 
-            <div>
-                <button class="logout" onclick="location.href='@Url.Action("Logout", "Login")'">Logout</button>
-            </div>
+
 
         </nav>
-      
+
     </header>
-    <div class=".bg-success m-5">
-        <main role="main" class="p-3 mb-2 bg-info text-white">
+    <div style="background-color:aliceblue;margin:25px">
+        <main role="main" class=" text-dark">
             @RenderBody()
         </main>
     </div>

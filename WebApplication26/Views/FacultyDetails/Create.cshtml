@@ -1,4 +1,5 @@
 ﻿@model WebApplication26.Models.FacultyDetail
+@using Microsoft.AspNetCore.Http;
 
 @{
     Layout = null;
@@ -16,28 +17,26 @@
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body style="color: white;background-image: linear-gradient(pink, lightblue,white);">
-    <nav class="navbar-expand-sm navbar-toggleable-sm  navbar-dark bg-dark border-bottom box-shadow mb-3">
+    <nav class=" navbar-dark bg-dark">
         <div class="ml-5 mr-5 ">
 
             <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
 
             <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse ">
                 <ul class="navbar-nav flex-grow-1">
 
                     <li class="nav-item">
-                        <a class="nav-link text-light badge badge-primary bg-primary text-wrap text-uppercase h1 navigation" style="padding:5px" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        <a class="nav-link text-light badge badge-primary bg-primary text-wrap text-uppercase h1 navigation" style="padding:5px;margin: 16px;" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <button class="logout" onclick="location.href='@Url.Action("Logout", "Login")'">logout</button>
-                    </li>
+
 
                 </ul>
-
-
+                @if (@Context.Session.GetString("Type") != null)
+                        {
+                <div>
+                    <button class="logout" onclick="location.href='@Url.Action("Logout", "Login")'">Logout</button>
+                </div>
+                }
             </div>
 
         </div>
@@ -46,7 +45,7 @@
 
     </nav>
 
-    <h1 style="color:black">Create Faculty Account</h1>
+    <h1 style="color:black" class="text-center">Create Faculty Account</h1>
 
 
     <hr />
@@ -72,7 +71,7 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="DateOfBirth" class="control-label"></label>
-                    <input asp-for="DateOfBirth" class="form-control" />
+                    <input asp-for="DateOfBirth" type="date" id="dob" onblur="blurFunction()" class="form-control" />
                     <span asp-validation-for="DateOfBirth" class="text-danger"></span>
                 </div>
                 <div class="form-group">
@@ -94,8 +93,9 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="Pswd" class="control-label"></label>
-                    <input asp-for="Pswd" class="form-control" />
+                    <input asp-for="Pswd" id="Pswd" type="password" class="form-control" />
                     <span asp-validation-for="Pswd" class="text-danger"></span>
+                    <input type="checkbox" onclick="myFunction()">Show Password
                 </div>
                 <div class="form-group">
                     <label asp-for="FkDeptId" class="control-label"></label>
@@ -128,6 +128,30 @@
             alert("Account created.Please wait till admin approves your account");
         }
     </script>
+    <script>
+        function myFunction() {
+            var x = document.getElementById("Pswd");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+    </script>
+    <script>
+        function blurFunction() {
 
+            //var a = document.getElementById("#dob").Date;
+            var b = Date.now();
+            year = $('#dob').getFullYear();
+            alert(year);
+            alert(b.getFullYear());
+            if ((b.getFullYear() - year) > 18) {
+
+                alert("Age Can't be less than 18");
+            }
+        }
+
+    </script>
 </body>
 </html>

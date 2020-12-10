@@ -8,16 +8,17 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using WebApplication26.Models;
-
+using Microsoft.Extensions.Configuration;
 namespace WebApplication26.Controllers
 {
     public class AttendanceDetailsController : Controller
     {
         private readonly project1211Context _context;
-
-        public AttendanceDetailsController(project1211Context context)
+        private readonly IConfiguration con;
+        public AttendanceDetailsController(project1211Context context,IConfiguration connection)
         {
             _context = context;
+            con = connection;
         }
 
         // GET: AttendanceDetails
@@ -29,10 +30,11 @@ namespace WebApplication26.Controllers
 
            
             var project1211Context1 = _context.AttendanceDetails.FirstOrDefault(a => a.CreatedDate.Value.Date == date);
-            if ((HttpContext.Session.GetString("Type") == "2")&&(project1211Context1==null))
+            if ((HttpContext.Session.GetString("Type") == "2")&&(project1211Context1!=null))
             {
-                var db = new project1211Context();
-                using (SqlConnection connection = new SqlConnection("Server=tcp:testserver1211.database.windows.net,1433;Initial Catalog=project1211;Persist Security Info=False;User ID=Admin123;Password=Garry@123;MultipleActiveResultSets=True;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"))
+                
+                string myDb1ConnectionString = con.GetValue<string>("ConnectionStrings:WebApplication22Context"); 
+                using (SqlConnection connection = new SqlConnection(myDb1ConnectionString))
                 using (SqlCommand command = connection.CreateCommand())
                 {
                     command.CommandText = "exec p1";
@@ -47,8 +49,20 @@ namespace WebApplication26.Controllers
 
 
             }
-            var project1211Context = _context.AttendanceDetails.Include(a => a.FkStud).OrderByDescending(a => a.CreatedDate);
-            return View(await project1211Context.ToListAsync());
+            if ((HttpContext.Session.GetString("Type") == "1"))
+            {var email= (from s in _context.StudentDetails
+                         where s.Email == HttpContext.Session.GetString("Email")
+                select s).SingleOrDefault();
+                var project1211Context = _context.AttendanceDetails.Where(a => a.FkStudId==email.PkStudentId).OrderByDescending(a => a.CreatedDate);
+                return View(await project1211Context.ToListAsync());
+            }
+            else
+            {
+                var project1211Context = _context.AttendanceDetails.Include(a => a.FkStud).OrderByDescending(a => a.CreatedDate);
+                return View(await project1211Context.ToListAsync());
+            }
+            
+            
         }
 
         // GET: AttendanceDetails/Details/5

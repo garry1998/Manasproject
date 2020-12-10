@@ -71,6 +71,27 @@ namespace WebApplication26.Controllers
         {
             if (ModelState.IsValid)
             {
+                var ac = Convert.ToDateTime(facultyDetail.DateOfBirth);
+                
+                DateTime PresentYear = DateTime.Now;
+                TimeSpan ts = PresentYear - ac;
+                if (ts.Days > 0)
+                {
+                    DateTime Age = DateTime.MinValue.AddDays(ts.Days);
+                    if (Age.Year - 1 < 18)
+                    {
+                        ModelState.AddModelError("", "Age cant be less than 18");
+                        return View(facultyDetail);
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Dob cant be future date");
+                    return View(facultyDetail);
+                }
+
+                if (facultyDetail.PkFacultyId == 0||facultyDetail.Email==null||facultyDetail.Pswd==null||facultyDetail.FirstName==null) { return View(facultyDetail); }
+               
                 _context.Add(facultyDetail);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

@@ -35,20 +35,23 @@
                 @Html.DisplayNameFor(model => model.Contact)
             </th>
             @*<th>
-                    @Html.DisplayNameFor(model => model.Pswd)
-                </th>*@
+            @Html.DisplayNameFor(model => model.Pswd)
+        </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.FatherName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.CreatedDate)
             </th>
-            @*<th>
-                    @Html.DisplayNameFor(model => model.IsActive)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.IsDeleted)
-                </th>*@
+            @if (@Context.Session.GetString("Type") == "3")
+                    {
+            <th>
+                @Html.DisplayNameFor(model => model.IsActive)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsDeleted)
+            </th>
+            }
             <th>
                 @Html.DisplayNameFor(model => model.FkDept)
             </th>
@@ -58,58 +61,61 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FacultyId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FirstName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LastName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DateOfBirth)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Address)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Contact)
-                </td>
-                @*<td>
-                        @Html.DisplayFor(modelItem => item.Pswd)
-                    </td>*@
-                <td>
-                    @Html.DisplayFor(modelItem => item.FatherName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CreatedDate)
-                </td>
-                @*<td>
-                        @Html.DisplayFor(modelItem => item.IsActive)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.IsDeleted)
-                    </td>*@
-                <td>
-                    @Html.DisplayFor(modelItem => item.FkDept.PkDeptId)
-                </td>
-                <td>
-                    @if ((@Context.Session.GetString("Type") == "3") || (@Context.Session.GetString("Email") == item.Email))
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FacultyId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfBirth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Contact)
+            </td>
+            @*<td>
+            @Html.DisplayFor(modelItem => item.Pswd)
+        </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.FatherName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            @if (@Context.Session.GetString("Type") == "3")
                     {
-                        <a asp-action="Edit" asp-route-id="@item.PkFacultyId">Edit</a>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsDeleted)
+            </td>
+            }
+            <td>
+                @Html.DisplayFor(modelItem => item.FkDept.PkDeptId)
+            </td>
+            <td>
+                @if ((@Context.Session.GetString("Type") == "3") || (@Context.Session.GetString("Email") == item.Email))
+                    {
+                <a asp-action="Edit" asp-route-id="@item.PkFacultyId">Edit</a>
                                                                                        }
-                  |  <a asp-action="Details" asp-route-id="@item.PkFacultyId">Details</a> |
-                    @if (@Context.Session.GetString("Type") == "3")
+                |  <a asp-action="Details" asp-route-id="@item.PkFacultyId">Details</a> |
+                @if (@Context.Session.GetString("Type") == "3")
                     {
-                        <a asp-action="Delete" asp-route-id="@item.PkFacultyId">Delete</a>
+                <a asp-action="Delete" asp-route-id="@item.PkFacultyId">Delete</a>
                         }
-                    </td>
-            </tr>
+            </td>
+        </tr>
         }
     </tbody>
 </table>

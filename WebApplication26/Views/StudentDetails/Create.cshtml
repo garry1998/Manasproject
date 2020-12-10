@@ -27,7 +27,7 @@
     <!-- Main CSS-->
     <link href="/css/main.css" rel="stylesheet" media="all">
 </head>
-<h2 class="title">Student Registration </h2>
+<h2 class="text-center">Student Registration </h2>
 <hr />
 
 
@@ -80,8 +80,12 @@
                         </div>
                         <div class="form-group">
                             <label asp-for="Pswd" class="control-label"></label>
-                            <input asp-for="Pswd" class="form-control" />
+                            <input asp-for="Pswd" id="Pswd" type="password" class="form-control" />
+                            <input type="checkbox" onclick="myFunction()" style="width: auto;"><text style="color:black">Check password</text>
+
+
                             <span asp-validation-for="Pswd" class="text-danger"></span>
+
                         </div>
                         <div class="form-group">
                             <label asp-for="Course" class="control-label"></label>
@@ -132,6 +136,16 @@
 <script>
     function myFunction() {
         alert("Account created.Please wait till admin approves your account");
+    }
+</script>
+<script>
+    function myFunction() {
+        var x = document.getElementById("Pswd");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
     }
 </script>
 @section Scripts {
