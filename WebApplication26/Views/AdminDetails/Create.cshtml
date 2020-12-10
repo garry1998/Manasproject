@@ -60,7 +60,7 @@
                 <span asp-validation-for="FatherName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" onclick="myFunction()" />
+                <input type="submit" value="Create" class="btn btn-primary" onclick="myFunction1()" />
             </div>
         </form>
     </div>
@@ -70,11 +70,10 @@
     <a asp-action="Index">Back to List</a>
 </div>
 <script>
-    function myFunction() {
-        alert("Account created.Please wait till admin approves your account");
+    function myFunction1() {
+        alert("Please wait till admin approves your account");
     }
-</script>
-<script>
+
     function myFunction() {
         var x = document.getElementById("Pswd");
         if (x.type === "password") {

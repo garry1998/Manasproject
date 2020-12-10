@@ -16,12 +16,13 @@ a.navbar-brand {
    
     font-size: 21px;
     border-radius: 25px;
-    padding: 6px;
+    padding:3px 8px 3px 8px;
     float: right;
     margin: 8px;
     color: black;
-    position: inherit right:5px;
-    top: 6px;
+    position: absolute;
+    right:5px;
+    top:13px;
 }
 /* Provide sufficient contrast against white background */
 a {

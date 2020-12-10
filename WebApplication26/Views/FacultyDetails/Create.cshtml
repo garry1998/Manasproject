@@ -107,7 +107,7 @@
                     <span asp-validation-for="FatherName" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary" onclick="myFunction()" />
+                    <input type="submit" value="Create" class="btn btn-primary" onclick="myFunction1()" />
                 </div>
             </div>
         </div>
@@ -124,8 +124,8 @@
         @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     }
     <script>
-        function myFunction() {
-            alert("Account created.Please wait till admin approves your account");
+        function myFunction1() {
+            alert("Please wait till admin approves your account");
         }
     </script>
     <script>

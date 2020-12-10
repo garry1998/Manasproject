@@ -166,7 +166,10 @@ namespace WebApplication26.Controllers
 
         // GET: StudentDetails/Edit/5
         public async Task<IActionResult> Edit(int? id)
-        {
+        { var getid = (from s in _context.StudentDetails
+                       where s.Email == HttpContext.Session.GetString("Email")
+                       select s.PkStudentId).SingleOrDefault();
+            id = getid;
             if (id == null)
             {
                 return NotFound();
@@ -187,6 +190,10 @@ namespace WebApplication26.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("PkStudentId,EnrollId,Email,FirstName,LastName,DateOfBirth,Contact,Address,Pswd,Course,FatherName,CreatedDate,IsActive,IsDeleted,PProfilepic,studentPic")] StudentDetail studentDetail)
         {
+            var getid = (from s in _context.StudentDetails
+                         where s.Email == HttpContext.Session.GetString("Email")
+                         select s.PkStudentId).SingleOrDefault();
+            id = getid;
             if (id != studentDetail.PkStudentId)
             {
                 return NotFound();

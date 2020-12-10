@@ -30,7 +30,7 @@ namespace WebApplication26.Controllers
 
            
             var project1211Context1 = _context.AttendanceDetails.FirstOrDefault(a => a.CreatedDate.Value.Date == date);
-            if ((HttpContext.Session.GetString("Type") == "2")&&(project1211Context1!=null))
+            if ((HttpContext.Session.GetString("Type") == "2")&&(project1211Context1==null))
             {
                 
                 string myDb1ConnectionString = con.GetValue<string>("ConnectionStrings:WebApplication22Context"); 
@@ -87,6 +87,7 @@ namespace WebApplication26.Controllers
         // GET: AttendanceDetails/Create
         public IActionResult Create()
         {
+            ViewBag.test = new SelectList(new[] { "Present", "Absent" });
             ViewData["FkStudId"] = new SelectList(_context.StudentDetails, "PkStudentId", "PkStudentId");
             return View();
         }
@@ -123,6 +124,10 @@ namespace WebApplication26.Controllers
                 return NotFound();
             }
             ViewData["FkStudId"] = new SelectList(_context.StudentDetails, "PkStudentId", "Contact", attendanceDetail.FkStudId);
+            // List<string> s1 = new List<string>
+            ViewBag.test = new SelectList(new[] { "Present", "Absent" });
+
+          //  ViewData["FkStudId1"] = new SelectList("");
             return View(attendanceDetail);
         }
 

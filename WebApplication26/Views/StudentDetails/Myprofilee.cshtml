@@ -32,33 +32,31 @@
 
             <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse ">
                 <ul class="navbar-nav flex-grow-1">
-
-                    @if (@Context.Session.GetString("Type") == "1")
-                        {
-                    <li class="nav-item">
-                        <a class="nav-link text-light badge badge-primary text-wrap text-uppercase  navigation"  asp-action="Edit" asp-route-id="@Model.PkStudentId">Edit Profile</a>
-                    </li>
-                        }
-                    @if (@Context.Session.GetString("Type") == "1")
-                        {
-                    <li class="nav-item">
-                        <a class="nav-link text-light badge badge-primary text-wrap text-uppercase  navigation"  asp-area="" asp-controller="AttendanceDetails" asp-action="Index">AttendanceDetails</a>
-                    </li>
-                        }
-
-
-                    @if (@Context.Session.GetString("Type") == "1")
-                        {
-                    <li class="nav-item">
-                        <a class="nav-link text-light badge badge-primary text-wrap text-uppercase  navigation "  asp-area="" asp-controller="StudentDetails" asp-action="Index">StudentDetails</a>
-                    </li>
-                        }
                     @if (@Context.Session.GetString("Type") == "1")
                         {
                     <li class="nav-item">
                         <a class="nav-link text-light badge badge-primary text-wrap text-uppercase  navigation " style="padding:5px" asp-area="" asp-controller="StudentDetails" asp-action="Myprofilee">My Profile</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light badge badge-primary text-wrap text-uppercase  navigation" asp-action="Edit" asp-route-id="@Model.PkStudentId">Edit Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light badge badge-primary text-wrap text-uppercase  navigation" asp-area="" asp-controller="AttendanceDetails" asp-action="Index">AttendanceDetails</a>
+                    </li>
+
+
+
+
+                    <li class="nav-item">
+                        <a class="nav-link text-light badge badge-primary text-wrap text-uppercase  navigation " asp-area="" asp-controller="StudentDetails" asp-action="Index">StudentDetails</a>
+                    </li>
+
                         }
+
+
+
+
+
 
 
 

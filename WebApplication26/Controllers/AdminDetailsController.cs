@@ -84,7 +84,7 @@ namespace WebApplication26.Controllers
                     ModelState.AddModelError("", "Dob cant be future date");
                     return View(adminDetail);
                 }
-                if (adminDetail.PkAdminId == 0 || adminDetail.Email == null || adminDetail.Pswd == null || adminDetail.FirstName == null) { return View(adminDetail); }
+                if (adminDetail.EmployeeId == null || adminDetail.Email == null || adminDetail.Pswd == null || adminDetail.FirstName == null) { return View(adminDetail); }
               
                 _context.Add(adminDetail);
                 await _context.SaveChangesAsync();
