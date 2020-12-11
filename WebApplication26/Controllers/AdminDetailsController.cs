@@ -85,7 +85,9 @@ namespace WebApplication26.Controllers
                     return View(adminDetail);
                 }
                 if (adminDetail.EmployeeId == null || adminDetail.Email == null || adminDetail.Pswd == null || adminDetail.FirstName == null) { return View(adminDetail); }
-              
+                var record_Check = _context.MstUsers.FirstOrDefault(m => m.Email == adminDetail.Email || m.Contact == adminDetail.Contact);
+                if (record_Check != null)
+                { ModelState.AddModelError("", "Email or Mobile Assosiated with other Account"); return View(adminDetail); }
                 _context.Add(adminDetail);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

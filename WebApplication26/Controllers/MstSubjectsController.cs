@@ -47,6 +47,7 @@ namespace WebApplication26.Controllers
         // GET: MstSubjects/Create
         public IActionResult Create()
         {
+            ViewBag.IsActive = new SelectList(new[] { "True", "False" });
             ViewData["FkSemId"] = new SelectList(_context.MstSemesters, "PkSemId", "PkSemId");
             return View();
         }
@@ -81,6 +82,7 @@ namespace WebApplication26.Controllers
             {
                 return NotFound();
             }
+            ViewBag.IsActive = new SelectList(new[] { "True", "False" });
             ViewData["FkSemId"] = new SelectList(_context.MstSemesters, "PkSemId", "PkSemId", mstSubject.FkSemId);
             return View(mstSubject);
         }

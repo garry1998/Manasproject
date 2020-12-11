@@ -71,6 +71,7 @@ namespace WebApplication26.Controllers
         {
             if (ModelState.IsValid)
             {
+                var CurrentUserIDSession = HttpContext.Session.GetString("name");
                 var ac = Convert.ToDateTime(facultyDetail.DateOfBirth);
                 
                 DateTime PresentYear = DateTime.Now;
@@ -90,8 +91,10 @@ namespace WebApplication26.Controllers
                     return View(facultyDetail);
                 }
 
-                if (facultyDetail.PkFacultyId == 0||facultyDetail.Email==null||facultyDetail.Pswd==null||facultyDetail.FirstName==null) { return View(facultyDetail); }
-               
+                if (facultyDetail.FacultyId == null||facultyDetail.Email==null||facultyDetail.Pswd==null||facultyDetail.FirstName==null) { ModelState.AddModelError("", "Field can't be left blank"); return View(facultyDetail); }
+                var record_Check =  _context.MstUsers.FirstOrDefault(m => m.Email == facultyDetail.Email || m.Contact==facultyDetail.Contact);
+                if (record_Check!=null)
+                { ModelState.AddModelError("", "Email or Mobile Assosiated with other Account"); return View(facultyDetail); }
                 _context.Add(facultyDetail);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

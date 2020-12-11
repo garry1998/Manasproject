@@ -1,4 +1,5 @@
 ﻿@model WebApplication26.Models.StudentDetail
+@using Microsoft.AspNetCore.Http;
 
 @{
     ViewData["Title"] = "Edit";
@@ -68,30 +69,33 @@
                 <input asp-for="CreatedDate" class="form-control" />
                 <span asp-validation-for="CreatedDate" class="text-danger"></span>
             </div>
-            <div class="form-group" hidden>
-                <label asp-for="IsActive" class="control-label"></label>
-                <input asp-for="IsActive" class="form-control" />
-                <span asp-validation-for="IsActive" class="text-danger"></span>
-            </div>
-            <div class="form-group" hidden>
-                <label asp-for="IsDeleted" class="control-label"></label>
-                <input asp-for="IsDeleted" class="form-control" />
-                <span asp-validation-for="IsDeleted" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PProfilepic" class="control-label"></label>
-                <input asp-for="PProfilepic" accept="image/*" />
-                <span asp-validation-for="PProfilepic" class="text-danger"></span>
-            </div>
-            <div class="form-group" hidden>
-                <label asp-for="studentPic" class="control-label"></label>
-                <input asp-for="studentPic" class="form-control" />
-                <span asp-validation-for="studentPic" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+            @if (@Context.Session.GetString("Type") == "3")
+            {
+                <div class="form-group">
+                    <label asp-for="IsActive" class="control-label"></label>
+                    <input asp-for="IsActive" class="form-control" />
+                    <span asp-validation-for="IsActive" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="IsDeleted" class="control-label"></label>
+                    <input asp-for="IsDeleted" class="form-control" />
+                    <span asp-validation-for="IsDeleted" class="text-danger"></span>
+                </div>
+            }
+                <div class="form-group">
+                    <label asp-for="PProfilepic" class="control-label"></label>
+                    <input asp-for="PProfilepic" accept="image/*" />
+                    <span asp-validation-for="PProfilepic" class="text-danger"></span>
+                </div>
+                <div class="form-group" hidden>
+                    <label asp-for="studentPic" class="control-label"></label>
+                    <input asp-for="studentPic" class="form-control" />
+                    <span asp-validation-for="studentPic" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
     </div>
 </div>
 

@@ -16,8 +16,8 @@
 
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
-<body style="color: white;background-image: linear-gradient(pink, lightblue,white);">
-    <nav class=" navbar-dark bg-dark">
+<body style="color: white;background-image: linear-gradient(pink, lightblue,white);margin: 0px 15px 10px 15px;">
+    <nav class=" navbar-dark "style="background-color: #e44157;border-radius: 14px;">
         <div class="ml-5 mr-5 ">
 
             <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"></a>
@@ -26,17 +26,17 @@
                 <ul class="navbar-nav flex-grow-1">
 
                     <li class="nav-item">
-                        <a class="nav-link text-light badge badge-primary bg-primary text-wrap text-uppercase h1 navigation" style="padding:5px;margin: 16px;" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        <a class="nav-link text-light   text-wrap text-uppercase h1 navigation" style="padding:5px;margin:8px; " asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                     </li>
 
 
                 </ul>
-                @if (@Context.Session.GetString("Type") != null)
+                @*@if (@Context.Session.GetString("Type") !="")
                         {
                 <div>
                     <button class="logout" onclick="location.href='@Url.Action("Logout", "Login")'">Logout</button>
                 </div>
-                }
+                }*@
             </div>
 
         </div>
@@ -117,7 +117,7 @@
 
 
     <div>
-        <a asp-action="Index">Back to List</a>
+        <a asp-action="Index">Back </a>
     </div>
 
     @section Scripts {

@@ -3,7 +3,7 @@ for details on configuring this project to bundle and minify static web assets. 
 .navigation {
     padding:5px;
 
-    margin: 10px;
+    margin: 2px;
     font-size: large;
 }
 a.navbar-brand {
@@ -12,13 +12,13 @@ a.navbar-brand {
   word-break: break-all;
 }
 .logout {
-    background-color: #d34259;
+    background-color: white;
    
     font-size: 21px;
     border-radius: 25px;
     padding:3px 8px 3px 8px;
     float: right;
-    margin: 8px;
+   
     color: black;
     position: absolute;
     right:5px;

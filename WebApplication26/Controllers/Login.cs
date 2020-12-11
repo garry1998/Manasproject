@@ -24,10 +24,10 @@ namespace WebApplication26.Controllers
         }
         public IActionResult Logout()
         {
-            HttpContext.Session.SetString("name", "");
-            HttpContext.Session.SetString("Type", "");
-            HttpContext.Session.SetString("Email", "");
-
+            //HttpContext.Session.SetString("name","");
+            //HttpContext.Session.SetString("Type","");
+            //HttpContext.Session.SetString("Email","");
+            HttpContext.Session.Clear();
             return RedirectToAction("Index", "Login");
 
 

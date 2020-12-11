@@ -16,12 +16,12 @@
     <link rel="stylesheet" href="~/css/site.css" />
     
 </head>
-<body style=" background-image: linear-gradient(pink, White, blue);" class=".bg-success">
+<body style="background-image: linear-gradient(pink, White, #0000ff7d);margin: 0px 15px 10px 15px;" class=".bg-success">
 
 
 
 
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar navbar-dark bg-dark border-bottom box-shadow mb-3">
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar  border-bottom box-shadow mb-3 p-0" style="background-color: #e44157;border-radius: 14px;">
         <div class="ml-5 mr-5 ">
 
             <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"></a>
@@ -35,20 +35,20 @@
                     @if (@Context.Session.GetString("Type") == "1")
                         {
                     <li class="nav-item">
-                        <a class="nav-link text-light badge badge-primary text-wrap text-uppercase  navigation " style="padding:5px" asp-area="" asp-controller="StudentDetails" asp-action="Myprofilee">My Profile</a>
+                        <a class="nav-link text-light h1 text-wrap text-uppercase  navigation " style="padding:5px" asp-area="" asp-controller="StudentDetails" asp-action="Myprofilee">My Profile</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-light badge badge-primary text-wrap text-uppercase  navigation" asp-action="Edit" asp-route-id="@Model.PkStudentId">Edit Profile</a>
+                        <a class="nav-link text-light h1 text-wrap text-uppercase  navigation" asp-action="Edit" asp-route-id="@Model.PkStudentId">Edit Profile</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-light badge badge-primary text-wrap text-uppercase  navigation" asp-area="" asp-controller="AttendanceDetails" asp-action="Index">AttendanceDetails</a>
+                        <a class="nav-link text-light h1 text-wrap text-uppercase  navigation" asp-area="" asp-controller="AttendanceDetails" asp-action="Index">AttendanceDetails</a>
                     </li>
 
 
 
 
                     <li class="nav-item">
-                        <a class="nav-link text-light badge badge-primary text-wrap text-uppercase  navigation " asp-area="" asp-controller="StudentDetails" asp-action="Index">StudentDetails</a>
+                        <a class="nav-link text-light h1 text-wrap text-uppercase  navigation " asp-area="" asp-controller="StudentDetails" asp-action="Index">StudentDetails</a>
                     </li>
 
                         }
@@ -110,11 +110,22 @@
 
 
                             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                <h3><i class="text-secondary">Total Classes:@ViewBag.attendance</i></h3>
+                                <h4><i class="text-secondary">Total Classes:@ViewBag.attendance</i></h4>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                <h3><i class="text-secondary">Total Classes Attended:@ViewBag.attended</i></h3>
+                                <h4><i class="text-secondary">Classes Attended:@ViewBag.attended</i></h4>
                             </li>
+                            @if(@ViewBag.attendance.ToString()=="Not updated"){
+                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                <h4><i class="text-secondary">Percent(%):Not updated</i></h4>
+                            </li>
+                            }
+                            else{
+                            
+                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                <h4><i class="text-secondary">Percent(%):@((@ViewBag.attended*100)/@ViewBag.attendance)</i></h4>
+                            </li>
+                            }
                         </ul>
                     </div>
                 </div>
@@ -172,7 +183,8 @@
                         <div class="col-sm-6 mb-3">
                             <div class="card h-100">
                                 <div class="card-body" style="padding: 1rem;">
-                                    <h4 class="d-flex align-items-center mb-3">Marks Scored</h4>
+                                    <h4 class="d-flex align-items-center mb-3"style="justify-content: center;">Marks Scored</h4>
+                                    <hr/>
                                     <small></small>
                                     <div class=" mb-3 m-5" style="height: 5px ">
                                         <h5><i class="text-secondary">Sem 1 Scores(%):@ViewBag.marks[0]</i></h5>
@@ -195,7 +207,8 @@
                         <div class="col-sm-6 mb-3">
                             <div class="card h-100">
                                 <div class="card-body" style="padding: 1rem;">
-                                    <h4 class="d-flex align-items-center mb-3">Marks Scored</h4>
+                                    <h4 class="d-flex align-items-center mb-3"style="justify-content: center;">Marks Scored</h4>
+                                    <hr/>
                                     <small></small>
                                     <div class=" mb-3  m-5" style="height: 5px">
                                         <h5 class="text-secondary">Sem 5 Scores(%):@ViewBag.marks[4]</h5>

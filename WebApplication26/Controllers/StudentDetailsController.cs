@@ -85,6 +85,7 @@ namespace WebApplication26.Controllers
                     ViewBag.attendance = "Not updated";
                     ViewBag.attended = "Not updated";
                 }
+                
                 var list = _context.MarksDetails.Where(a => a.FkStudId == id).OrderBy(a => a.FkSemId);
                 var count = _context.MarksDetails.Count(a => a.FkStudId == id);
                 ArrayList l1 = new ArrayList();
@@ -97,11 +98,15 @@ namespace WebApplication26.Controllers
                         {
                             if (a.FkSemId == i)
                             {
-                                l1.Add(Math.Round((float)(((a.SessionalMarks + a.MainExamMarks) * 100) / a.TotalMarks),2));
+                                l1.Add(Math.Round((float)(((a.SessionalMarks + a.MainExamMarks) * 100) / a.TotalMarks), 2));
                                 check = 1;
                             }
-                            
+
                         }
+                        if (check == 0) { l1.Add("Pending"); }
+                    }
+                    else {
+
                         if (check == 0) { l1.Add("Pending"); }
                     }
                   
@@ -153,8 +158,10 @@ namespace WebApplication26.Controllers
                     return View(studentDetail);
                 }
 
-                if (studentDetail.PkStudentId == 0 || studentDetail.Email == null || studentDetail.Pswd == null || studentDetail.FirstName == null) { return View(studentDetail); }
-               
+                if (studentDetail.EnrollId == null || studentDetail.Email == null || studentDetail.Pswd == null || studentDetail.FirstName == null) { return View(studentDetail); }
+                var record_Check = _context.MstUsers.FirstOrDefault(m => m.Email == studentDetail.Email || m.Contact == studentDetail.Contact);
+                if (record_Check != null)
+                { ModelState.AddModelError("", "Email or Mobile Assosiated with other Account"); return View(studentDetail); }
                 studentDetail.CreatedDate = DateTime.Now;
                 _context.Add(studentDetail);
                 await _context.SaveChangesAsync();
@@ -166,10 +173,15 @@ namespace WebApplication26.Controllers
 
         // GET: StudentDetails/Edit/5
         public async Task<IActionResult> Edit(int? id)
-        { var getid = (from s in _context.StudentDetails
-                       where s.Email == HttpContext.Session.GetString("Email")
-                       select s.PkStudentId).SingleOrDefault();
-            id = getid;
+        {
+            if (id == null||id==0)
+            {
+                var getid = (from s in _context.StudentDetails
+                             where s.Email == HttpContext.Session.GetString("Email")
+                             select s.PkStudentId).SingleOrDefault();
+                id = getid;
+            }
+
             if (id == null)
             {
                 return NotFound();
@@ -190,10 +202,14 @@ namespace WebApplication26.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("PkStudentId,EnrollId,Email,FirstName,LastName,DateOfBirth,Contact,Address,Pswd,Course,FatherName,CreatedDate,IsActive,IsDeleted,PProfilepic,studentPic")] StudentDetail studentDetail)
         {
-            var getid = (from s in _context.StudentDetails
-                         where s.Email == HttpContext.Session.GetString("Email")
-                         select s.PkStudentId).SingleOrDefault();
-            id = getid;
+            if (id == 0||id==null) {
+                var getid = (from s in _context.StudentDetails
+                             where s.Email == HttpContext.Session.GetString("Email")
+                             select s.PkStudentId).SingleOrDefault();
+                id = getid;
+            }
+            
+            
             if (id != studentDetail.PkStudentId)
             {
                 return NotFound();
@@ -228,9 +244,12 @@ namespace WebApplication26.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("Myprofilee", "StudentDetails");
+                if (HttpContext.Session.GetString("Type") == "1") { return RedirectToAction("Myprofilee", "StudentDetails"); }
+                else { return RedirectToAction(nameof(Index)); }
+              
             }
-            return RedirectToAction("Myprofilee", "StudentDetails");
+            if (HttpContext.Session.GetString("Type") == "1") { return RedirectToAction("Myprofilee", "StudentDetails"); }
+            else { return RedirectToAction(nameof(Index)); }
         }
 
         // GET: StudentDetails/Delete/5

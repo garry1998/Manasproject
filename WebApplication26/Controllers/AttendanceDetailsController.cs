@@ -30,6 +30,7 @@ namespace WebApplication26.Controllers
 
            
             var project1211Context1 = _context.AttendanceDetails.FirstOrDefault(a => a.CreatedDate.Value.Date == date);
+           // var ac = project1211Context1.CreatedDate;
             if ((HttpContext.Session.GetString("Type") == "2")&&(project1211Context1==null))
             {
                 
@@ -101,10 +102,19 @@ namespace WebApplication26.Controllers
         {
             if (ModelState.IsValid)
             {
-                attendanceDetail.CreatedDate = DateTime.Now;
-                _context.Add(attendanceDetail);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                var date = DateTime.Today;
+      var project1211Context1 = _context.AttendanceDetails.FirstOrDefault(a => a.CreatedDate.Value.Date ==attendanceDetail.CreatedDate && a.FkStudId==attendanceDetail.FkStudId);
+                if (project1211Context1 == null)
+                {
+                    //attendanceDetail.CreatedDate = DateTime.Now;
+                    _context.Add(attendanceDetail);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                else {
+                    ModelState.AddModelError("", "Record Already Exist");
+                    return View(attendanceDetail);
+                }
             }
             ViewData["FkStudId"] = new SelectList(_context.StudentDetails, "PkStudentId", "Contact", attendanceDetail.FkStudId);
             return View(attendanceDetail);
