@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication26.Models;
@@ -28,6 +31,7 @@ namespace WebApplication26.Controllers
             //HttpContext.Session.SetString("Type","");
             //HttpContext.Session.SetString("Email","");
             HttpContext.Session.Clear();
+            var login = HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index", "Login");
 
 
@@ -38,10 +42,11 @@ namespace WebApplication26.Controllers
         public ActionResult Index(Logincs objs)
 
         { var ac= (from s in _context.MstUsers
-                                 where s.Email == objs.Username 
-                                 select s).SingleOrDefault();
+                   where s.Email == objs.Username 
+                   select s).SingleOrDefault();
 
-
+            ClaimsIdentity identity = null;
+            bool isAuthenticated = false;
 
             if ((!ModelState.IsValid) || ac == null)
             {
@@ -64,7 +69,23 @@ namespace WebApplication26.Controllers
                         HttpContext.Session.SetString("Email", ac.Email);
                         HttpContext.Session.SetString("name", ac.Fname + ac.Lname);
                         HttpContext.Session.SetString("Type", ac.FkRoleId.ToString());
-                        return RedirectToAction("Myprofilee", "StudentDetails");
+                        identity = new ClaimsIdentity(new[] {
+                    new Claim(ClaimTypes.Name,ac.Fname),
+                    new Claim(ClaimTypes.Role, "Student")
+                }, CookieAuthenticationDefaults.AuthenticationScheme);
+
+                        isAuthenticated = true;
+                        if (isAuthenticated)
+                        {
+                            var principal = new ClaimsPrincipal(identity);
+
+                            var login = HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+
+                            return RedirectToAction("Myprofilee", "StudentDetails");
+                        }
+                        else { return RedirectToAction("Index", "Login"); }
+                       
+                       
                     }
                     else
                     {
@@ -73,8 +94,31 @@ namespace WebApplication26.Controllers
                         HttpContext.Session.SetString("Type", ac.FkRoleId.ToString());
                         //this.Session.SetString("TransId", "x001");
                         //Session["UserId"] = Guid.NewGuid();
+                        if (objs.checktype == 2)
+                        {
+                            identity = new ClaimsIdentity(new[] {
+                        new Claim(ClaimTypes.Name, ac.Fname),
+                    new Claim(ClaimTypes.Role, "Faculty")
+                }, CookieAuthenticationDefaults.AuthenticationScheme);
+                        }
+                        if (objs.checktype == 3)
+                        {
+                            identity = new ClaimsIdentity(new[] {
+                        new Claim(ClaimTypes.Name, ac.Fname),
+                    new Claim(ClaimTypes.Role, "Admin")
+                }, CookieAuthenticationDefaults.AuthenticationScheme);
+                        }
+
+                    isAuthenticated = true;
+                    if (isAuthenticated)
+                    {
+                        var principal = new ClaimsPrincipal(identity);
+
+                        var login = HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
                         return RedirectToAction("Index", "Home");
+                    }
+                        else { return RedirectToAction("Index", "Login"); }
                     }
                 }
 

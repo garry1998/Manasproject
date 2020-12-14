@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -19,12 +20,15 @@ namespace WebApplication26.Controllers
         }
 
         // GET: MstRoles
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
             return View(await _context.MstRoles.ToListAsync());
         }
 
         // GET: MstRoles/Details/5
+        [Authorize(Roles = "Admin")]
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -43,6 +47,8 @@ namespace WebApplication26.Controllers
         }
 
         // GET: MstRoles/Create
+        [Authorize(Roles = "Admin")]
+
         public IActionResult Create()
         {
             return View();
@@ -65,6 +71,8 @@ namespace WebApplication26.Controllers
         }
 
         // GET: MstRoles/Edit/5
+        [Authorize(Roles = "Admin")]
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -116,6 +124,8 @@ namespace WebApplication26.Controllers
         }
 
         // GET: MstRoles/Delete/5
+        [Authorize(Roles = "Admin")]
+
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -136,6 +146,8 @@ namespace WebApplication26.Controllers
         // POST: MstRoles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
+
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var mstRole = await _context.MstRoles.FindAsync(id);

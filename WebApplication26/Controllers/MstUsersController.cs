@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -19,30 +20,34 @@ namespace WebApplication26.Controllers
         }
 
         // GET: MstUsers
+        [Authorize(Roles = "Admin")]
+
         public async Task<IActionResult> Index()
         {
-            return View(await _context.MstUsers.ToListAsync());
+            return View(await _context.MstUsers.OrderByDescending(a=>a.CreatedDate).ToListAsync());
         }
 
         // GET: MstUsers/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+        //public async Task<IActionResult> Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var mstUser = await _context.MstUsers
-                .FirstOrDefaultAsync(m => m.PkUserId == id);
-            if (mstUser == null)
-            {
-                return NotFound();
-            }
+        //    var mstUser = await _context.MstUsers
+        //        .FirstOrDefaultAsync(m => m.PkUserId == id);
+        //    if (mstUser == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return View(mstUser);
-        }
+        //    return View(mstUser);
+        //}
 
         // GET: MstUsers/Create
+        [Authorize(Roles = "Admin")]
+
         public IActionResult Create()
         {
             return View();
@@ -65,13 +70,15 @@ namespace WebApplication26.Controllers
         }
 
         // GET: MstUsers/Edit/5
+        [Authorize(Roles = "Admin")]
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-
+            ViewBag.TrueFalse = new SelectList(new[] { "True", "False" });
             var mstUser = await _context.MstUsers.FindAsync(id);
             if (mstUser == null)
             {
@@ -116,6 +123,8 @@ namespace WebApplication26.Controllers
         }
 
         // GET: MstUsers/Delete/5
+        [Authorize(Roles = "Admin")]
+
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -136,6 +145,8 @@ namespace WebApplication26.Controllers
         // POST: MstUsers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
+
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var mstUser = await _context.MstUsers.FindAsync(id);

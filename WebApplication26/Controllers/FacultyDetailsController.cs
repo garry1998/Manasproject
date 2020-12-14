@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -20,6 +21,8 @@ namespace WebApplication26.Controllers
         }
 
         // GET: FacultyDetails
+        [Authorize(Roles = "Faculty,Admin")]
+
         public async Task<IActionResult> Index()
         {
             var CurrentUserIDSession = HttpContext.Session.GetString("name");
@@ -37,6 +40,8 @@ namespace WebApplication26.Controllers
         }
 
         // GET: FacultyDetails/Details/5
+        [Authorize(Roles = "Faculty")]
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -104,6 +109,8 @@ namespace WebApplication26.Controllers
         }
 
         // GET: FacultyDetails/Edit/5
+        [Authorize(Roles = "Faculty")]
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -157,6 +164,8 @@ namespace WebApplication26.Controllers
         }
 
         // GET: FacultyDetails/Delete/5
+        [Authorize(Roles = "Faculty,Admin")]
+
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -178,6 +187,8 @@ namespace WebApplication26.Controllers
         // POST: FacultyDetails/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Faculty,Admin")]
+
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var facultyDetail = await _context.FacultyDetails.FindAsync(id);

@@ -266,7 +266,7 @@ ALTER TABLE [SMS].[Mst_Subject]  WITH CHECK ADD FOREIGN KEY([Fk_Sem_ID])
 REFERENCES [SMS].[Mst_Semester] ([Pk_Sem_ID])
 GO
 
-
+select * from [SMS].[Admin_Detail]
 --ALTER TABLE [SMS].[Student_Detail]  WITH CHECK ADD FOREIGN KEY([Fk_User_ID])
 --REFERENCES [SMS].[Mst_User] ([Pk_User_ID])
 --GO
@@ -339,5 +339,54 @@ set @Fk_Role_ID=3;
 insert into Mst_User (FName,LName,Email,Contact,Pswd,DOB,Fk_Role_ID)
 values(@FName,@LName,@Email,@Contact,@Pswd,@DOB,@Fk_Role_ID)
 end
+SHOW TRIGGERS 
+FROM project1211
+drop trigger AdminTrigUpdate12 on [SMS].[Admin_Detail]
+alter trigger AdminTrigUpdate12 on [SMS].[Admin_Detail]
+after insert
+as
+begin
+declare @FName nvarchar(30);
+ declare @LName nvarchar(30);
+declare @Email nvarchar(60);
+declare @Contact nvarchar(10);
+declare @Pswd nvarchar(20);
+declare @DOB datetime ;
+declare @Fk_Role_ID int;
+declare @Is_Active bit;
 
+select @FName=First_Name from inserted;
+select @LName=Last_Name from inserted;
+select @Email=Email from inserted;
+select @Contact=Contact from inserted;
+select @Pswd=Pswd from inserted;
+select @DOB=Date_Of_Birth from inserted;
+select @DOB=Date_Of_Birth from inserted;
+select @Is_Active=@Is_Active from inserted;
 
+set @Fk_Role_ID=3;
+update Mst_User set FName=@FName,LName=@LName,Email=@Email,Contact=@Contact,Pswd=@Pswd,DOB=@DOB,Is_Active=@Is_Active
+
+end
+
+create procedure p1 
+@today datetime 
+as begin
+DECLARE @cnt INT ;
+Set @cnt=(Select count(*)+100 from [SMS].[Student_Detail]);
+DECLARE @cnt1 INT=101;
+WHILE @cnt1 <= @cnt
+BEGIN
+if exists (select Pk_Student_ID from [SMS].[Student_Detail] where Pk_Student_ID=@cnt1)
+begin
+ insert into [SMS].[Attendance_Detail] values(@cnt1,'Absent',@today)
+ Set @cnt1 = @cnt1 + 1
+ end
+ else
+ begin
+ Set @cnt= @cnt + 1
+ Set @cnt1 = @cnt1 + 1
+ end
+
+END;
+end

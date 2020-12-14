@@ -231,6 +231,10 @@ C:\Users\grvci\source\repos\WebApplication26\obj\Debug\netcoreapp3.1\Razor\Views
 C:\Git\Manas Project\WebApplication26\bin\Debug\netcoreapp3.1\appsettings.Development.json
 C:\Git\Manas Project\WebApplication26\bin\Debug\netcoreapp3.1\appsettings.json
 C:\Git\Manas Project\WebApplication26\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
+C:\Git\Manas Project\WebApplication26\bin\Debug\netcoreapp3.1\Properties\ServiceDependencies\Manasproj - Web Deploy\profile.arm.json
+C:\Git\Manas Project\WebApplication26\bin\Debug\netcoreapp3.1\Properties\ServiceDependencies\Manasproject - Web Deploy\profile.arm.json
+C:\Git\Manas Project\WebApplication26\bin\Debug\netcoreapp3.1\Properties\ServiceDependencies\Manass - Web Deploy\profile.arm.json
+C:\Git\Manas Project\WebApplication26\bin\Debug\netcoreapp3.1\Properties\ServiceDependencies\testmyfirst1221 - Web Deploy\profile.arm.json
 C:\Git\Manas Project\WebApplication26\bin\Debug\netcoreapp3.1\WebApplication26.exe
 C:\Git\Manas Project\WebApplication26\bin\Debug\netcoreapp3.1\WebApplication26.deps.json
 C:\Git\Manas Project\WebApplication26\bin\Debug\netcoreapp3.1\WebApplication26.runtimeconfig.json
@@ -288,6 +292,7 @@ C:\Git\Manas Project\WebApplication26\bin\Debug\netcoreapp3.1\Microsoft.VisualSt
 C:\Git\Manas Project\WebApplication26\bin\Debug\netcoreapp3.1\Microsoft.Web.Infrastructure.dll
 C:\Git\Manas Project\WebApplication26\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
 C:\Git\Manas Project\WebApplication26\bin\Debug\netcoreapp3.1\NuGet.Frameworks.dll
+C:\Git\Manas Project\WebApplication26\bin\Debug\netcoreapp3.1\Polly.dll
 C:\Git\Manas Project\WebApplication26\bin\Debug\netcoreapp3.1\SQLitePCLRaw.batteries_v2.dll
 C:\Git\Manas Project\WebApplication26\bin\Debug\netcoreapp3.1\SQLitePCLRaw.nativelibrary.dll
 C:\Git\Manas Project\WebApplication26\bin\Debug\netcoreapp3.1\SQLitePCLRaw.core.dll
@@ -384,6 +389,8 @@ C:\Git\Manas Project\WebApplication26\bin\Debug\netcoreapp3.1\runtimes\win\lib\n
 C:\Git\Manas Project\WebApplication26\obj\Debug\netcoreapp3.1\WebApplication26.csprojAssemblyReference.cache
 C:\Git\Manas Project\WebApplication26\obj\Debug\netcoreapp3.1\WebApplication26.AssemblyInfoInputs.cache
 C:\Git\Manas Project\WebApplication26\obj\Debug\netcoreapp3.1\WebApplication26.AssemblyInfo.cs
+C:\Git\Manas Project\WebApplication26\obj\Debug\netcoreapp3.1\WebApplication26.csproj.CoreCompileInputs.cache
+C:\Git\Manas Project\WebApplication26\obj\Debug\netcoreapp3.1\WebApplication26.MvcApplicationPartsAssemblyInfo.cache
 C:\Git\Manas Project\WebApplication26\obj\Debug\netcoreapp3.1\WebApplication26.RazorAssemblyInfo.cache
 C:\Git\Manas Project\WebApplication26\obj\Debug\netcoreapp3.1\WebApplication26.RazorAssemblyInfo.cs
 C:\Git\Manas Project\WebApplication26\obj\Debug\netcoreapp3.1\WebApplication26.TagHelpers.input.cache
@@ -445,6 +452,8 @@ C:\Git\Manas Project\WebApplication26\obj\Debug\netcoreapp3.1\Razor\Views\Studen
 C:\Git\Manas Project\WebApplication26\obj\Debug\netcoreapp3.1\Razor\Views\StudentDetails\Details.cshtml.g.cs
 C:\Git\Manas Project\WebApplication26\obj\Debug\netcoreapp3.1\Razor\Views\StudentDetails\Edit.cshtml.g.cs
 C:\Git\Manas Project\WebApplication26\obj\Debug\netcoreapp3.1\Razor\Views\StudentDetails\Index.cshtml.g.cs
+C:\Git\Manas Project\WebApplication26\obj\Debug\netcoreapp3.1\Razor\Views\StudentDetails\Myprofile.cshtml.g.cs
+C:\Git\Manas Project\WebApplication26\obj\Debug\netcoreapp3.1\Razor\Views\StudentDetails\Myprofilee.cshtml.g.cs
 C:\Git\Manas Project\WebApplication26\obj\Debug\netcoreapp3.1\Razor\Views\_ViewImports.cshtml.g.cs
 C:\Git\Manas Project\WebApplication26\obj\Debug\netcoreapp3.1\Razor\Views\_ViewStart.cshtml.g.cs
 C:\Git\Manas Project\WebApplication26\obj\Debug\netcoreapp3.1\WebApplication26.RazorTargetAssemblyInfo.cache
@@ -456,12 +465,3 @@ C:\Git\Manas Project\WebApplication26\obj\Debug\netcoreapp3.1\staticwebassets\We
 C:\Git\Manas Project\WebApplication26\obj\Debug\netcoreapp3.1\WebApplication26.dll
 C:\Git\Manas Project\WebApplication26\obj\Debug\netcoreapp3.1\WebApplication26.pdb
 C:\Git\Manas Project\WebApplication26\obj\Debug\netcoreapp3.1\WebApplication26.genruntimeconfig.cache
-C:\Git\Manas Project\WebApplication26\bin\Debug\netcoreapp3.1\Properties\ServiceDependencies\testmyfirst1221 - Web Deploy\profile.arm.json
-C:\Git\Manas Project\WebApplication26\obj\Debug\netcoreapp3.1\Razor\Views\StudentDetails\Myprofile.cshtml.g.cs
-C:\Git\Manas Project\WebApplication26\obj\Debug\netcoreapp3.1\Razor\Views\StudentDetails\Myprofilee.cshtml.g.cs
-C:\Git\Manas Project\WebApplication26\bin\Debug\netcoreapp3.1\Properties\ServiceDependencies\Manasproject - Web Deploy\profile.arm.json
-C:\Git\Manas Project\WebApplication26\bin\Debug\netcoreapp3.1\Properties\ServiceDependencies\Manasproj - Web Deploy\profile.arm.json
-C:\Git\Manas Project\WebApplication26\bin\Debug\netcoreapp3.1\Polly.dll
-C:\Git\Manas Project\WebApplication26\obj\Debug\netcoreapp3.1\WebApplication26.csproj.CoreCompileInputs.cache
-C:\Git\Manas Project\WebApplication26\obj\Debug\netcoreapp3.1\WebApplication26.MvcApplicationPartsAssemblyInfo.cache
-C:\Git\Manas Project\WebApplication26\bin\Debug\netcoreapp3.1\Properties\ServiceDependencies\Manass - Web Deploy\profile.arm.json

@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using WebApplication26.Models;
 using System.Collections;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebApplication26.Controllers
 {
@@ -25,19 +26,12 @@ namespace WebApplication26.Controllers
         }
 
         // GET: StudentDetails
+        [Authorize(Roles = "Student,Faculty,Admin")]
         public async Task<IActionResult> Index()
         {
-            var CurrentUserIDSession = HttpContext.Session.GetString("name");
-            if (string.IsNullOrEmpty(CurrentUserIDSession))
-            {
-
-                return RedirectToAction("Index", "Login");
-
-            }
-            else
-            {
+            
                 return View(await _context.StudentDetails.ToListAsync());
-            }
+            
         }
 
         // GET: StudentDetails/Details/5
@@ -57,7 +51,7 @@ namespace WebApplication26.Controllers
 
             return View(studentDetail);
         }
-      
+        [Authorize(Roles = "Student")]
         public async Task<IActionResult> Myprofilee(int? id)
         {var Email = HttpContext.Session.GetString("Email");
             var CurrentUserIDSession = HttpContext.Session.GetString("name");
@@ -169,9 +163,10 @@ namespace WebApplication26.Controllers
             }
             return View(studentDetail);
         }
-      
+
 
         // GET: StudentDetails/Edit/5
+        [Authorize(Roles = "Student")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null||id==0)
@@ -253,6 +248,7 @@ namespace WebApplication26.Controllers
         }
 
         // GET: StudentDetails/Delete/5
+        [Authorize(Roles = "Student,Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)

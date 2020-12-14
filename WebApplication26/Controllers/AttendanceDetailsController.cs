@@ -9,6 +9,8 @@ using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using WebApplication26.Models;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Authorization;
+
 namespace WebApplication26.Controllers
 {
     public class AttendanceDetailsController : Controller
@@ -22,14 +24,16 @@ namespace WebApplication26.Controllers
         }
 
         // GET: AttendanceDetails
+        [Authorize(Roles = "Student,Faculty")]
+
         public async Task<IActionResult> Index()
         {
-            var date = DateTime.Today;
+            var date = DateTime.Now;
           
 
 
            
-            var project1211Context1 = _context.AttendanceDetails.FirstOrDefault(a => a.CreatedDate.Value.Date == date);
+            var project1211Context1 = _context.AttendanceDetails.FirstOrDefault(a => a.CreatedDate.Value.Date == DateTime.Today);
            // var ac = project1211Context1.CreatedDate;
             if ((HttpContext.Session.GetString("Type") == "2")&&(project1211Context1==null))
             {
@@ -38,7 +42,8 @@ namespace WebApplication26.Controllers
                 using (SqlConnection connection = new SqlConnection(myDb1ConnectionString))
                 using (SqlCommand command = connection.CreateCommand())
                 {
-                    command.CommandText = "exec p1";
+                    command.CommandText = "exec p1 @today";
+                    command.Parameters.AddWithValue("@today", date);
 
 
                     connection.Open();
@@ -67,6 +72,7 @@ namespace WebApplication26.Controllers
         }
 
         // GET: AttendanceDetails/Details/5
+        [Authorize(Roles = "Faculty")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -86,6 +92,8 @@ namespace WebApplication26.Controllers
         }
 
         // GET: AttendanceDetails/Create
+        [Authorize(Roles = "Faculty")]
+
         public IActionResult Create()
         {
             ViewBag.test = new SelectList(new[] { "Present", "Absent" });
@@ -121,6 +129,8 @@ namespace WebApplication26.Controllers
         }
 
         // GET: AttendanceDetails/Edit/5
+        [Authorize(Roles = "Faculty")]
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -178,6 +188,8 @@ namespace WebApplication26.Controllers
         }
 
         // GET: AttendanceDetails/Delete/5
+        [Authorize(Roles = "Faculty")]
+
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -199,6 +211,8 @@ namespace WebApplication26.Controllers
         // POST: AttendanceDetails/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Faculty")]
+
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var attendanceDetail = await _context.AttendanceDetails.FindAsync(id);

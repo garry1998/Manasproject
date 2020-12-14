@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -18,17 +19,12 @@ namespace WebApplication26.Controllers
         {
             _logger = logger;
         }
+        [Authorize(Roles = "Faculty,Admin")]
 
         public IActionResult Index()
         {
-            var CurrentUserIDSession = HttpContext.Session.GetString("name");
-            if (string.IsNullOrEmpty(CurrentUserIDSession))
-            {
-
-                return RedirectToAction("Index", "Login");
-
-            }
-            else
+           
+            
                 return View();
         }
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -20,20 +21,16 @@ namespace WebApplication26.Controllers
         }
 
         // GET: AdminDetails
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
-            var CurrentUserIDSession = HttpContext.Session.GetString("name");
-            if (string.IsNullOrEmpty(CurrentUserIDSession))
-            {
-
-                return RedirectToAction("Index", "Login");
-
-            }
-            else
+            
                 return View(await _context.AdminDetails.ToListAsync());
         }
 
         // GET: AdminDetails/Details/5
+        [Authorize(Roles = "Admin")]
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -84,7 +81,7 @@ namespace WebApplication26.Controllers
                     ModelState.AddModelError("", "Dob cant be future date");
                     return View(adminDetail);
                 }
-                if (adminDetail.EmployeeId == null || adminDetail.Email == null || adminDetail.Pswd == null || adminDetail.FirstName == null) { return View(adminDetail); }
+                if (adminDetail.EmployeeId == null || adminDetail.Email == null || adminDetail.Pswd == null || adminDetail.FirstName == null) { ModelState.AddModelError("", "Can't left fields empty"); return View(adminDetail); }
                 var record_Check = _context.MstUsers.FirstOrDefault(m => m.Email == adminDetail.Email || m.Contact == adminDetail.Contact);
                 if (record_Check != null)
                 { ModelState.AddModelError("", "Email or Mobile Assosiated with other Account"); return View(adminDetail); }
@@ -96,6 +93,8 @@ namespace WebApplication26.Controllers
         }
 
         // GET: AdminDetails/Edit/5
+        [Authorize(Roles = "Admin")]
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -147,6 +146,8 @@ namespace WebApplication26.Controllers
         }
 
         // GET: AdminDetails/Delete/5
+        [Authorize(Roles = "Admin")]
+
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)

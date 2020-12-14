@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +20,8 @@ namespace WebApplication26.Controllers
         }
 
         // GET: MarksDetails
+        [Authorize(Roles = "Faculty")]
+
         public async Task<IActionResult> Index()
         {
             var project1211Context = _context.MarksDetails.Include(m => m.FkSem).Include(m => m.FkStud).Include(m => m.FkSub);
@@ -26,6 +29,8 @@ namespace WebApplication26.Controllers
         }
 
         // GET: MarksDetails/Details/5
+        [Authorize(Roles = "Faculty")]
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -47,11 +52,13 @@ namespace WebApplication26.Controllers
         }
 
         // GET: MarksDetails/Create
+        [Authorize(Roles = "Faculty")]
+
         public IActionResult Create()
         {
             ViewData["FkSemId"] = new SelectList(_context.MstSemesters, "PkSemId", "PkSemId");
-            ViewData["FkStudId"] = new SelectList(_context.StudentDetails, "PkStudentId", "Contact");
-            ViewData["FkSubId"] = new SelectList(_context.MstSubjects, "PkSubjectId", "PkSubjectId");
+            ViewData["FkStudId"] = new SelectList(_context.StudentDetails, "PkStudentId","PkStudentId");
+            ViewData["FkSubId"] = new SelectList(_context.MstSubjects, "PkSubjectId", "SubjectName");
             return View();
         }
 
@@ -69,12 +76,14 @@ namespace WebApplication26.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["FkSemId"] = new SelectList(_context.MstSemesters, "PkSemId", "PkSemId", marksDetail.FkSemId);
-            ViewData["FkStudId"] = new SelectList(_context.StudentDetails, "PkStudentId", "Contact", marksDetail.FkStudId);
-            ViewData["FkSubId"] = new SelectList(_context.MstSubjects, "PkSubjectId", "PkSubjectId", marksDetail.FkSubId);
+            ViewData["FkStudId"] = new SelectList(_context.StudentDetails, "PkStudentId", "PkStudentId", marksDetail.FkStudId);
+            ViewData["FkSubId"] = new SelectList(_context.MstSubjects, "PkSubjectId", "SubjectName", marksDetail.FkSubId);
             return View(marksDetail);
         }
 
         // GET: MarksDetails/Edit/5
+        [Authorize(Roles = "Faculty")]
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -88,8 +97,8 @@ namespace WebApplication26.Controllers
                 return NotFound();
             }
             ViewData["FkSemId"] = new SelectList(_context.MstSemesters, "PkSemId", "PkSemId", marksDetail.FkSemId);
-            ViewData["FkStudId"] = new SelectList(_context.StudentDetails, "PkStudentId", "Contact", marksDetail.FkStudId);
-            ViewData["FkSubId"] = new SelectList(_context.MstSubjects, "PkSubjectId", "PkSubjectId", marksDetail.FkSubId);
+            ViewData["FkStudId"] = new SelectList(_context.StudentDetails, "PkStudentId", "PkStudentId", marksDetail.FkStudId);
+            ViewData["FkSubId"] = new SelectList(_context.MstSubjects, "PkSubjectId", "SubjectName", marksDetail.FkSubId);
             return View(marksDetail);
         }
 
@@ -126,12 +135,14 @@ namespace WebApplication26.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["FkSemId"] = new SelectList(_context.MstSemesters, "PkSemId", "PkSemId", marksDetail.FkSemId);
-            ViewData["FkStudId"] = new SelectList(_context.StudentDetails, "PkStudentId", "Contact", marksDetail.FkStudId);
-            ViewData["FkSubId"] = new SelectList(_context.MstSubjects, "PkSubjectId", "PkSubjectId", marksDetail.FkSubId);
+            ViewData["FkStudId"] = new SelectList(_context.StudentDetails, "PkStudentId", "PkStudentId", marksDetail.FkStudId);
+            ViewData["FkSubId"] = new SelectList(_context.MstSubjects, "PkSubjectId", "SubjectName", marksDetail.FkSubId);
             return View(marksDetail);
         }
 
         // GET: MarksDetails/Delete/5
+        [Authorize(Roles = "Faculty")]
+
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -155,6 +166,8 @@ namespace WebApplication26.Controllers
         // POST: MarksDetails/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Faculty")]
+
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var marksDetail = await _context.MarksDetails.FindAsync(id);

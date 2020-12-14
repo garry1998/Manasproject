@@ -7,9 +7,9 @@
 
 <h1>Index</h1>
 
-@*<p>
+<p>
     <a asp-action="Create">Create New</a>
-</p>*@
+</p>
 <table class="table">
     <thead>
         <tr>
@@ -105,11 +105,13 @@
                 @Html.DisplayFor(modelItem => item.FkDept.PkDeptId)
             </td>
             <td>
-                @if ((@Context.Session.GetString("Type") == "3") || (@Context.Session.GetString("Email") == item.Email))
+                @if (@Context.Session.GetString("Email") == item.Email)
                     {
                 <a asp-action="Edit" asp-route-id="@item.PkFacultyId">Edit</a>
+                <a>|</a>
+                <a asp-action="Details" asp-route-id="@item.PkFacultyId">Details</a> 
+
                                                                                        }
-                |  <a asp-action="Details" asp-route-id="@item.PkFacultyId">Details</a> |
                 @if (@Context.Session.GetString("Type") == "3")
                     {
                 <a asp-action="Delete" asp-route-id="@item.PkFacultyId">Delete</a>
