@@ -32,13 +32,22 @@ namespace WebApplication26
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
+                
             });
 
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options=> { options.AccessDeniedPath = new PathString("/Login/Logout"); });
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options=> { options.AccessDeniedPath = new PathString("/Login/Logout");});
+            services.AddSession(opts =>
+            {
+                opts.Cookie.IsEssential = true;
+                
+               
+
+                
+            });
             services.AddDbContext<project1211Context>
                               (op => op.UseSqlServer(Configuration["ConnectionStrings:WebApplication22Context"]));
             services.AddControllersWithViews();
-            services.AddSession();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,12 +65,13 @@ namespace WebApplication26
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
-            app.UseSession();
-            app.UseStaticFiles();
             app.UseCookiePolicy();
+            // app.UseSession();
+            app.UseStaticFiles();
+           
             app.UseAuthentication();
             app.UseRouting();
-
+            app.UseSession();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

@@ -24,8 +24,18 @@ namespace WebApplication26.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
-            
+            var CurrentUserIDSession = HttpContext.Session.GetString("name");
+            if (string.IsNullOrEmpty(CurrentUserIDSession))
+            {
+
+                return RedirectToAction("Index", "Login");
+
+            }
+            else
+            {
+
                 return View(await _context.AdminDetails.ToListAsync());
+            }
         }
 
         // GET: AdminDetails/Details/5
@@ -87,7 +97,18 @@ namespace WebApplication26.Controllers
                 { ModelState.AddModelError("", "Email or Mobile Assosiated with other Account"); return View(adminDetail); }
                 _context.Add(adminDetail);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                var CurrentUserIDSession = HttpContext.Session.GetString("name");
+
+                if (string.IsNullOrEmpty(CurrentUserIDSession))
+                {
+
+                    return RedirectToAction("Index", "Login");
+
+                }
+                else
+                {
+                    return RedirectToAction(nameof(Index));
+                }
             }
             return View(adminDetail);
         }

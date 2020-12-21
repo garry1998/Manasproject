@@ -29,9 +29,19 @@ namespace WebApplication26.Controllers
         [Authorize(Roles = "Student,Faculty,Admin")]
         public async Task<IActionResult> Index()
         {
-            
+            var CurrentUserIDSession = HttpContext.Session.GetString("name");
+            if (string.IsNullOrEmpty(CurrentUserIDSession))
+            {
+
+                return RedirectToAction("Index", "Login");
+
+            }
+            else
+            {
                 return View(await _context.StudentDetails.ToListAsync());
-            
+            }
+
+
         }
 
         // GET: StudentDetails/Details/5
@@ -51,7 +61,7 @@ namespace WebApplication26.Controllers
 
             return View(studentDetail);
         }
-        [Authorize(Roles = "Student")]
+       [Authorize(Roles = "Student")]
         public async Task<IActionResult> Myprofilee(int? id)
         {var Email = HttpContext.Session.GetString("Email");
             var CurrentUserIDSession = HttpContext.Session.GetString("name");
@@ -159,7 +169,18 @@ namespace WebApplication26.Controllers
                 studentDetail.CreatedDate = DateTime.Now;
                 _context.Add(studentDetail);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                var CurrentUserIDSession = HttpContext.Session.GetString("name");
+
+                if (string.IsNullOrEmpty(CurrentUserIDSession))
+                {
+
+                    return RedirectToAction("Index", "Login");
+
+                }
+                else
+                {
+                    return RedirectToAction(nameof(Index));
+                }
             }
             return View(studentDetail);
         }

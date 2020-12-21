@@ -102,7 +102,17 @@ namespace WebApplication26.Controllers
                 { ModelState.AddModelError("", "Email or Mobile Assosiated with other Account"); return View(facultyDetail); }
                 _context.Add(facultyDetail);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                
+                if (string.IsNullOrEmpty(CurrentUserIDSession))
+                {
+
+                    return RedirectToAction("Index", "Login");
+
+                }
+                else
+                {
+                    return RedirectToAction(nameof(Index));
+                }
             }
             ViewData["FkDeptId"] = new SelectList(_context.MstDepartments, "PkDeptId", "PkDeptId", facultyDetail.FkDeptId);
             return View(facultyDetail);

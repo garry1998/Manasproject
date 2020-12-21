@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 #nullable disable
@@ -17,10 +18,12 @@ namespace WebApplication26.Models
 
         public int PkStudentId { get; set; }
         public string EnrollId { get; set; }
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime? DateOfBirth { get; set; }
+
         public string Contact { get; set; }
         public string Address { get; set; }
         public string Pswd { get; set; }

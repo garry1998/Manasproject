@@ -219,7 +219,6 @@ C:\Git\Manas Project\WebApplication26\obj\Release\netcoreapp3.1\Razor\Views\Stud
 C:\Git\Manas Project\WebApplication26\obj\Release\netcoreapp3.1\Razor\Views\StudentDetails\Details.cshtml.g.cs
 C:\Git\Manas Project\WebApplication26\obj\Release\netcoreapp3.1\Razor\Views\StudentDetails\Edit.cshtml.g.cs
 C:\Git\Manas Project\WebApplication26\obj\Release\netcoreapp3.1\Razor\Views\StudentDetails\Index.cshtml.g.cs
-C:\Git\Manas Project\WebApplication26\obj\Release\netcoreapp3.1\Razor\Views\StudentDetails\Myprofile.cshtml.g.cs
 C:\Git\Manas Project\WebApplication26\obj\Release\netcoreapp3.1\Razor\Views\StudentDetails\Myprofilee.cshtml.g.cs
 C:\Git\Manas Project\WebApplication26\obj\Release\netcoreapp3.1\Razor\Views\_ViewImports.cshtml.g.cs
 C:\Git\Manas Project\WebApplication26\obj\Release\netcoreapp3.1\Razor\Views\_ViewStart.cshtml.g.cs

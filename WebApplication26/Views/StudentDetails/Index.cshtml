@@ -19,14 +19,15 @@
                 @Html.DisplayNameFor(model => model.EnrollId)
             </th>
             <th>
+               Roll No
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Email)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FirstName)
+                Name
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastName)
-            </th>
+           
             <th>
                 @Html.DisplayNameFor(model => model.DateOfBirth)
             </th>
@@ -66,14 +67,15 @@
                 @Html.DisplayFor(modelItem => item.EnrollId)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.PkStudentId)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
+                @Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
+           
             <td>
                 @Html.DisplayFor(modelItem => item.DateOfBirth)
             </td>
@@ -103,19 +105,19 @@
                 @Html.DisplayFor(modelItem => item.IsDeleted)
             </td>
             }
-        <td>
-            @if (@Context.Session.GetString("Email") == item.Email)
+            <td>
+                @if (@Context.Session.GetString("Email") == item.Email)
             {
                 <a asp-action="Edit" asp-route-id="@item.PkStudentId">Edit</a>
                 <a>|</a>
                 <a asp-action="Details" asp-route-id="@item.PkStudentId">Details</a>
 
             }
-            @if (@Context.Session.GetString("Type") == "3")
+                @if (@Context.Session.GetString("Type") == "3")
             {
                 <a asp-action="Delete" asp-route-id="@item.PkStudentId">Delete</a>
             }
-        </td>
+            </td>
         </tr>
         }
     </tbody>

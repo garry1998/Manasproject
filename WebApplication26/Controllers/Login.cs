@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication;
+﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
+using System.Security.Claims;
 using WebApplication26.Models;
 
 namespace WebApplication26.Controllers
@@ -66,40 +63,37 @@ namespace WebApplication26.Controllers
                     if (objs.checktype == 1)
                     {
 
-                        HttpContext.Session.SetString("Email", ac.Email);
-                        HttpContext.Session.SetString("name", ac.Fname + ac.Lname);
-                        HttpContext.Session.SetString("Type", ac.FkRoleId.ToString());
+                       
                         identity = new ClaimsIdentity(new[] {
-                    new Claim(ClaimTypes.Name,ac.Fname),
-                    new Claim(ClaimTypes.Role, "Student")
-                }, CookieAuthenticationDefaults.AuthenticationScheme);
+                      new Claim(ClaimTypes.Name,ac.Fname),
+                      new Claim(ClaimTypes.Role, "Student")
+                      }, CookieAuthenticationDefaults.AuthenticationScheme);
 
-                        isAuthenticated = true;
-                        if (isAuthenticated)
-                        {
+                        
                             var principal = new ClaimsPrincipal(identity);
 
                             var login = HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+                            HttpContext.Session.SetString("Email", ac.Email);
+                            HttpContext.Session.SetString("name", ac.Fname + ac.Lname);
+                            HttpContext.Session.SetString("Type", ac.FkRoleId.ToString());
 
                             return RedirectToAction("Myprofilee", "StudentDetails");
-                        }
-                        else { return RedirectToAction("Index", "Login"); }
+                        
+                       
                        
                        
                     }
                     else
                     {
-                        HttpContext.Session.SetString("Email", ac.Email);
-                        HttpContext.Session.SetString("name", ac.Fname + ac.Lname);
-                        HttpContext.Session.SetString("Type", ac.FkRoleId.ToString());
+                       
                         //this.Session.SetString("TransId", "x001");
                         //Session["UserId"] = Guid.NewGuid();
                         if (objs.checktype == 2)
                         {
                             identity = new ClaimsIdentity(new[] {
                         new Claim(ClaimTypes.Name, ac.Fname),
-                    new Claim(ClaimTypes.Role, "Faculty")
-                }, CookieAuthenticationDefaults.AuthenticationScheme);
+                          new Claim(ClaimTypes.Role, "Faculty")
+                         }, CookieAuthenticationDefaults.AuthenticationScheme);
                         }
                         if (objs.checktype == 3)
                         {
@@ -109,16 +103,16 @@ namespace WebApplication26.Controllers
                 }, CookieAuthenticationDefaults.AuthenticationScheme);
                         }
 
-                    isAuthenticated = true;
-                    if (isAuthenticated)
-                    {
+                   
                         var principal = new ClaimsPrincipal(identity);
 
                         var login = HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
-
-                        return RedirectToAction("Index", "Home");
-                    }
-                        else { return RedirectToAction("Index", "Login"); }
+                            HttpContext.Session.SetString("Email", ac.Email);
+                            HttpContext.Session.SetString("name", ac.Fname + ac.Lname);
+                            HttpContext.Session.SetString("Type", ac.FkRoleId.ToString());
+                            return RedirectToAction("Index", "Home");
+                    
+                       
                     }
                 }
 

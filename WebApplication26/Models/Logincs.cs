@@ -10,9 +10,10 @@ namespace WebApplication26.Models
     {[Key]
         [Required]
         [Display(Name = "UserName")]
-
+        [DataType(DataType.EmailAddress)]
         public string Username { get; set; }
         [Required]
+
         [Display(Name = "UserPwd")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
