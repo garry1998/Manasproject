@@ -339,35 +339,7 @@ set @Fk_Role_ID=3;
 insert into Mst_User (FName,LName,Email,Contact,Pswd,DOB,Fk_Role_ID)
 values(@FName,@LName,@Email,@Contact,@Pswd,@DOB,@Fk_Role_ID)
 end
-SHOW TRIGGERS 
-FROM project1211
-drop trigger AdminTrigUpdate12 on [SMS].[Admin_Detail]
-alter trigger AdminTrigUpdate12 on [SMS].[Admin_Detail]
-after insert
-as
-begin
-declare @FName nvarchar(30);
- declare @LName nvarchar(30);
-declare @Email nvarchar(60);
-declare @Contact nvarchar(10);
-declare @Pswd nvarchar(20);
-declare @DOB datetime ;
-declare @Fk_Role_ID int;
-declare @Is_Active bit;
 
-select @FName=First_Name from inserted;
-select @LName=Last_Name from inserted;
-select @Email=Email from inserted;
-select @Contact=Contact from inserted;
-select @Pswd=Pswd from inserted;
-select @DOB=Date_Of_Birth from inserted;
-select @DOB=Date_Of_Birth from inserted;
-select @Is_Active=@Is_Active from inserted;
-
-set @Fk_Role_ID=3;
-update Mst_User set FName=@FName,LName=@LName,Email=@Email,Contact=@Contact,Pswd=@Pswd,DOB=@DOB,Is_Active=@Is_Active
-
-end
 
 create procedure p1 
 @today datetime 
