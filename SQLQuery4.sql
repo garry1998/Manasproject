@@ -341,11 +341,11 @@ values(@FName,@LName,@Email,@Contact,@Pswd,@DOB,@Fk_Role_ID)
 end
 
 
-create procedure p1 
+alter procedure p1 
 @today datetime 
 as begin
 DECLARE @cnt INT ;
-Set @cnt=(Select count(*)+100 from [SMS].[Student_Detail]);
+Set @cnt=(Select count(*)+101 from [SMS].[Student_Detail]);
 DECLARE @cnt1 INT=101;
 WHILE @cnt1 <= @cnt
 BEGIN
