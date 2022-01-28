@@ -1,12 +1,3 @@
-/branch xyz
-=======
-drop database project121
-
-drop database project121
-drop database project121
-=======
-
-
 drop database project121
 create database project121
 use  project121
