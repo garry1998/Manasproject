@@ -1,4 +1,6 @@
 /branch xyz
+<<<<<<< HEAD
+=======
 =======
 drop database project121
 
@@ -7,6 +9,7 @@ drop database project121
 =======
 
 
+>>>>>>> f693da207c6b6dcba9b4be47924d3dc7a180a7b2
 drop database project121
 create database project121
 use  project121
